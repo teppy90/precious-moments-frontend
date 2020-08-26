@@ -1,116 +1,194 @@
-import React, { useState, useEffect} from 'react'
-import { Typography, Button, Form, message, Input, Icon } from 'antd';
+import React, { useState, useEffect } from 'react'
+import { Typography, Button, Form, message, Input } from 'antd';
 import Dropzone from 'react-dropzone';
+import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
+import VideoServices from '../../services/VideoServices';
+import LoadingOverlay from 'react-loading-overlay';
+const url = 'https://res.cloudinary.com/dgsrnct2b';
 
 const { Title } = Typography;
 const { TextArea } = Input;
 
 const Private = [
-    { value: 0, label:'Private'},
-    { value: 1, label:'Public'}
+    { value: 0, label: 'Public' },
+    { value: 1, label: 'Private' }
 ]
 
-const Catogory = [
-    { value: 0, label: "Film & Animation" },
-    { value: 0, label: "Autos & Vehicles" },
-    { value: 0, label: "Music" },
-    { value: 0, label: "Pets & Animals" },
-    { value: 0, label: "Sports" },
+const Category = [
+    { value: 0, label: "Others" },
+    { value: 1, label: "Sports" },
+    { value: 2, label: "Music" },
+    { value: 3, label: "Tutorial" },
+    { value: 4, label: "Comedy" },
 ]
 
 function UploadVideoPage() {
-
+    const [statusDZ, setStatus] = useState("");
     const [title, setTitle] = useState("");
-    const [Description, setDescription] = useState("");
-    const [privacy, setPrivacy] = useState(0)
-    const [Categories, setCategories] = useState("Film & Animation")
+    const [description, setDescription] = useState("");
+    const [privacy, setPrivacy] = useState(0);
+    const [category, setCategory] = useState("Others");
+    const [videoFileName, setVidFileName] = useState(null);
+    const [videoFile, setVideoFile] = useState(null);
+    const [isLoading, setLoading] = useState(false);
 
-
-    const handleChangeTitle = ( event ) => {
+    const handleChangeTitle = (event) => {
         setTitle(event.currentTarget.value)
     }
 
     const handleChangeDecsription = (event) => {
-        console.log(event.currentTarget.value)
-
         setDescription(event.currentTarget.value)
     }
 
-    const handleChangeOne = (event) => {
+    const handleChangePrivate = (event) => {
         setPrivacy(event.currentTarget.value)
     }
 
-    const handleChangeTwo = (event) => {
-        setCategories(event.currentTarget.value)
+    const handleChangeCategory = (event) => {
+        setCategory(event.currentTarget.value)
     }
 
-    const onSubmit = () => {
-        
+    const createVideo = () => {
+        if (!title) {
+            alert('Please give a title to the video')
+        } else if (!description) {
+            alert('Please give a short description of the video')
+        } else if (!videoFile) {
+            alert('Please attach a video file')
+        } else {
+            let bodyData = new Object();
+            bodyData.title = title;
+            bodyData.description = description;
+            bodyData.privacy = privacy;
+            bodyData.category = category;
+            let formData = new FormData();
+            formData.append('file', videoFile);
+            formData.append('title', title);
+            formData.append('description', description);
+            formData.append('privacy', privacy);
+            formData.append('category', category);
+            // setLoading(true);
+            VideoServices.create(formData,bodyData)
+                .then(res => {
+                    // setLoading(false);
+                    alert(res);
+                })
+                .then(() => {
+                    console.log('hello')
+                });
+        }
+    }
+
+    const handleDrop = (acceptedFile, rejectedFile) => {
+        if (rejectedFile.length <= 0) {
+            setVideoFile(acceptedFile[0]);
+            setVidFileName(acceptedFile[0].name);
+        } else {
+            alert(rejectedFile[0].errors[0].message);
+        }
+    }
+
+    const toUploadFile = (getInputProps) => {
+        return (
+            <>
+                <input {...getInputProps()} />
+                <PlusOutlined style={{ position: 'unset' }} />
+                <p>Drag & drop your file here, or click to select file</p>
+            </>
+        )
+    }
+
+    const unSetVideo = () => {
+        setVidFileName(null);
+        setVideoFile(null);
+    }
+
+    const attachedFile = () => {
+        return (
+            <>
+                Attached file:
+                <br /><br />
+                {videoFileName}
+                <br /><br />
+                <DeleteOutlined onClick={unSetVideo} />
+            </>
+        )
     }
 
     return (
-        <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            <Title level={2} > Upload Video</Title>
-        </div>
+        <LoadingOverlay
+            active={isLoading}
+            spinner
+            text='Uploading video...'
+        >
+            <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
+                <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                    <Title level={2} > Upload Video</Title>
+                </div>
 
-        <Form onSubmit={onSubmit}>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Dropzone 
-                    multiple={false}
-                    maxSize={800000000}>
-                    {({ getRootProps, getInputProps }) => (
-                        <div style={{ width: '300px', height: '240px', border: '1px solid lightgray', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                            {...getRootProps()}
+                <Form onSubmit={createVideo}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Dropzone
+                            accept="video/*"
+                            multiple={false}
+                            maxSize={31457280}
+                            onDrop={(acceptedFile, rejectedFile) => handleDrop(acceptedFile, rejectedFile)}
                         >
-                            <input {...getInputProps()} />
-                            <Icon type="plus" style={{ fontSize: '3rem' }} />
-
-                        </div>
-                    )}
-                </Dropzone>
-
-                {/* {thumbnail !== "" &&
-                    <div>
-                        <img src={`http://localhost:5000/${thumbnail}`} alt="haha" />
+                            {({ getRootProps, getInputProps }) => (
+                                <div
+                                    style={{
+                                        width: '300px',
+                                        height: '240px',
+                                        border: '2px dashed #676CFB',
+                                        borderRadius: '25px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        textAlign: 'center'
+                                    }}
+                                    {...getRootProps({className: statusDZ})}
+                                >
+                                    <div>
+                                        {!videoFileName ? toUploadFile(getInputProps) : attachedFile()}
+                                    </div>
+                                </div>
+                            )}
+                        </Dropzone>
                     </div>
-                } */}
-            </div>
 
-            <br /><br />
-            <label>Title</label>
-            <Input
-                 onChange={handleChangeTitle}
-                 value={title}
-            />
-            <br /><br />
-            <label>Description</label>
-            <TextArea
-                 onChange={handleChangeDecsription}
-                 value={Description}
-            />
-            <br /><br />
+                    <br /><br />
+                    <label>Title</label>
+                    <Input
+                        onChange={handleChangeTitle}
+                        value={title}
+                        required={true}
+                    />
+                    <br /><br />
+                    <label>Description</label>
+                    <TextArea onChange={handleChangeDecsription} value={description} required={true} />
+                    <br /><br />
 
-            <select onChange={handleChangeOne}>
-                {Private.map((item, index) => (
-                    <option key={index} value={item.value}>{item.label}</option>
-                ))}
-            </select>
-            <br /><br />
+                    <select onChange={handleChangePrivate}>
+                        {Private.map((item, index) => (
+                            <option key={index} value={item.value}>{item.label}</option>
+                        ))}
+                    </select>
+                    <br /><br />
 
-            <select onChange={handleChangeTwo}>
-                {Catogory.map((item, index) => (
-                    <option key={index} value={item.label}>{item.label}</option>
-                ))}
-            </select>
-            <br /><br />
+                    <select onChange={handleChangeCategory}>
+                        {Category.map((item, index) => (
+                            <option key={index} value={item.label}>{item.label}</option>
+                        ))}
+                    </select>
+                    <br /><br />
 
-            <Button type="primary" size="large" onClick={onSubmit}>
-                Submit
+                    <Button type="primary" size="large" onClick={createVideo}>
+                        Submit
             </Button>
 
-        </Form>
-    </div>
+                </Form>
+            </div>
+        </LoadingOverlay>
     )
 }
 
