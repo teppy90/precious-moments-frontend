@@ -24,7 +24,7 @@ export default {
     },
     register: user => {
         return fetch(`${BACKEND_URL_USERS}/signup`, {
-            method: "post",
+            method: "post", 
             body: JSON.stringify(user),
             headers: {
                 'Content-Type': 'application/json',
