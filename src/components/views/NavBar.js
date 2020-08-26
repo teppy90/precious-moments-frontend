@@ -5,7 +5,11 @@ import AuthService from '../Services/AuthServices';
 import { AuthContext } from '../AuthContext';
 import { ButtonGroup, DropdownButton } from 'react-bootstrap';
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
+<<<<<<< HEAD
 import SearchBox from '../SearchBox'; 
+=======
+import SearchBox from './SearchBox'
+>>>>>>> fb7d559203100a337cddf7a8e710546b8a9580e7
 
 const Navbar = props => {
     const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
