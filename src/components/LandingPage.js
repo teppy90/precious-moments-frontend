@@ -30,6 +30,7 @@ function LandingPage() {
 
         return <Col lg={6} md={8} xs={24}>
             <div style={{ position: 'relative' }}>
+                <a href={`/video/${video._id}`} >
                 <img style={{ width: '100%' }} alt="thumbnail" src={`http://localhost:3000/${video.thumbnail}`} />
                 <div className=" duration"
                     style={{
@@ -40,6 +41,7 @@ function LandingPage() {
                     }}>
                     <span>{minutes} : {seconds}</span>
                 </div>
+                </a>
             </div><br />
             <Meta
                 avatar={
