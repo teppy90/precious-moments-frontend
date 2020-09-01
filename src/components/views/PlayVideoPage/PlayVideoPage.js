@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { List, Avatar, Typography } from 'antd';
 import axios from 'axios';
 
-function DetailVideoPage(props) {
+function PlayVideoPage(props) {
 
 
     const videoId = props.match.params.videoId
@@ -27,7 +27,7 @@ function DetailVideoPage(props) {
 
     return (
         <div className="postPage" style={{ width: '100%', padding: '3rem 4em' }}>
-            <video style={{ width: '100%' }} src={`http://localhost:5000/${Video.filePath}`} controls></video>
+            <video style={{ width: '100%' }} src={video.video_url} controls></video>
 
             <List.Item
                 actions={[]}
@@ -44,4 +44,4 @@ function DetailVideoPage(props) {
     )
 }
 
-export default DetailVideoPage
+export default PlayVideoPage
