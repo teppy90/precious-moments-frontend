@@ -27,8 +27,20 @@ function PlayVideoPage(props) {
 
     return (
         <div className="postPage" style={{ width: '100%', padding: '3rem 4em' }}>
-            <video style={{ width: '100%' }} src={video.video_url} controls></video>
-
+            
+            <video style={{ width: '100%' }} src={this.video.video_url} controls></video>
+            {/* <video style={{ width: '100%' }} src={`http://localhost:5000/${Video.filePath}`} controls></video> */}
+            {/* router.post("/getVideo", (req, res) => {
+src={this.props.imgUrl}
+Video.findOne({ "_id" : req.body.videoId })
+.populate('writer')
+.exec((err, video) => {
+    if(err) return res.status(400).send(err);
+    res.status(200).json({ success: true, video })
+}) */}
+});
+           
+            
             <List.Item
                 actions={[]}
             >
