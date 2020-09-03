@@ -10,6 +10,7 @@ import LandingPage from './components/LandingPage'
 import UploadVideoPage from './components/views/UploadVideoPage/UploadVideoPage';
 import UserProfilePri from './components/views/UserProfilePage/UserProfilePri';
 import UserProfilePub from './components/views/UserProfilePage/UserProfilePub';
+import PlayVideoPage from './components/views/PlayVideoPage/PlayVideoPage'
 
 
 function App() {
@@ -23,9 +24,12 @@ function App() {
       <Route path="/:userID/pubProf" component={UserProfilePub} />
       <Route path="/login"component= {Login}/>
       <Route path="/signup" component={Signup} />
+      <Route path="/upload" component={UploadVideoPage} />
+      <Route path ="/video/:videoId" component={PlayVideoPage} />
     </Switch>
   </React.Fragment>
   );
 }
 
 export default App;
+

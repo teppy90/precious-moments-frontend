@@ -1,3 +1,4 @@
+import "../components/navbar.css"
 import React, { Component, useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import AuthService from '../Services/AuthServices';
@@ -6,7 +7,6 @@ import { ButtonGroup, DropdownButton } from 'react-bootstrap';
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Form, FormControl, Button } from 'react-bootstrap'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import "../App.css"
 
 const Navigationbar = props => {
     const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
