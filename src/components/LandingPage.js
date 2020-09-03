@@ -28,7 +28,6 @@ function LandingPage(props) {
     }, [])
 
 
-
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
@@ -37,7 +36,7 @@ function LandingPage(props) {
         },
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
-            items: 4
+            items: 3
         },
         tablet: {
             breakpoint: { max: 1024, min: 464 },
@@ -51,39 +50,57 @@ function LandingPage(props) {
 
 
 
-
     const renderCards = Videos.map((video, index) => {
 
 
         return (
 
+            <div className='item'>
+
+                <a href={`${video._id}/video`} >
+                    <video width="320" height="240" src={video.video_url} />
+                </a>
+
+
+
+            </div>
+
+        )
+
+    })
+
+
+
+
+    return (
+
         <div style={{ width: '85%', margin: '2rem auto' }}>
-                        <Title level={2} > Recommended </Title>
-                        <Carousel className='container'
-                            swipeable={false}
-                            draggable={false}
-                            responsive={responsive}
-                            ssr={true} // means to render carousel on server-side.
-                            infinite={true}
-                            keyBoardControl={true}
-                            customTransition="all .5"
-                            transitionDuration={500}
-                            containerClass="carousel-container"
-                            removeArrowOnDeviceType={["tablet", "mobile"]}
-                            deviceType={props.deviceType}
-                            dotListClass="custom-dot-list-style"
-                            itemClass="carousel-item-padding-40-px"
-                        >
+            <Title level={2} > Recommended </Title>
+            <Carousel style={{ width: '100%', margin: '2rem auto' }} className='container-md'
+                swipeable={false}
+                draggable={false}
+                responsive={responsive}
+                ssr={true} // means to render carousel on server-side.
+                infinite={true}
+                keyBoardControl={true}
+                customTransition="all .5"
+                transitionDuration={500}
+                containerClass="carousel-container"
+                removeArrowOnDeviceType={["tablet", "mobile"]}
+                deviceType={props.deviceType}
+                dotListClass="custom-dot-list-style"
+                itemClass="carousel-item-padding-40-px"
+            >
 
-                            {renderCards}
-
-
-                        </Carousel>
+                {renderCards}
 
 
+            </Carousel>
 
 
-                    </div>
+
+
+        </div>
 
     )
 
