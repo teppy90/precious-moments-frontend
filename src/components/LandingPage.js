@@ -7,6 +7,7 @@ import 'react-multi-carousel/lib/styles.css';
 import axios from "axios";
 import moment from "moment";
 import '../components/landingpage.css'
+import VideoServices from '../Services/VideoServices';
 
 const { Title } = Typography;
 const { Meta } = Card
@@ -16,7 +17,7 @@ function LandingPage(props) {
 
 
     useEffect(() => {
-        axios.get('http://localhost:3002/videos')
+        VideoServices.getAll()
             .then(response => {
                 if (response.data.success) {
                     console.log(response.data.videos)

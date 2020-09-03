@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Typography, Button, Form, message, Input } from 'antd';
 import Dropzone from 'react-dropzone';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
-import VideoServices from '../../services/VideoServices';
+import VideoServices from '../../../Services/VideoServices';
 import LoadingOverlay from 'react-loading-overlay';
 const url = 'https://res.cloudinary.com/dgsrnct2b';
 
