@@ -19,7 +19,7 @@ function App() {
       <Route path="/login"component= {Login}/>
       <Route path="/signup" component={Signup} />
       <Route path="/upload" component={UploadVideoPage} />
-      <Route path ="/video/:videoID" component={PlayVideoPage} />
+      <Route path ="/video/:videoId" component={PlayVideoPage} />
     </Switch>
   </React.Fragment>
   );
