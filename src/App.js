@@ -20,7 +20,7 @@ function App() {
       <Route exact path="/" component= {LandingPage}/>
       <Route path="/uploadnew" component={UploadVideoPage} />
       <Route path="/priProf" component={UserProfilePri} />
-      <Route path="/pubProf" component={UserProfilePub} />
+      <Route path="/:userID/pubProf" component={UserProfilePub} />
       <Route path="/login"component= {Login}/>
       <Route path="/signup" component={Signup} />
     </Switch>
