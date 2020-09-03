@@ -38,7 +38,6 @@ function LandingPage() {
                         <Card style={{ width: '16rem' }}>                    
 
                             <Card.Link href={`/video/${video._id}`}>
-                            {/* should it be video/${video._id} cuz of app.js routing? */}
                                 <Card.Img variant="top" src="https://res.cloudinary.com/dgsrnct2b/video/upload/v1599117932/preciousmoment/mtfmvtotmfid6v5go7bd.mp4" />
                             </Card.Link>                            
                             <Card.Body>
@@ -47,7 +46,6 @@ function LandingPage() {
                                 </Card.Title>
                                 <Card.Text>
                                     {Videos.writer && Videos.writer.displayName} 
-                    {/* had to add videos.writer && */}
                                 </Card.Text>
                             </Card.Body>
                         </Card>

@@ -28,7 +28,7 @@ function PlayVideoPage(props) {
     return (
         <div className="postPage" style={{ width: '100%', padding: '3rem 4em' }}>
             
-            <video style={{ width: '100%' }} src={Video.video_url} controls></video> 
+            <video style={{ width: '50%', height: '50%' }} src={Video.video_url} controls></video> 
 
            
             
