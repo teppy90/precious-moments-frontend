@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Card, Avatar, Col, Typography, Row } from 'antd';
 import moment from "moment";
 const { Meta } = Card;
-const videoUrl = 'https://res.cloudinary.com/dgsrnct2b/video/upload/v1598963152/preciousmoment/talocjfqqjldi3ydmftl.mp4';
 
 function UserProfilePub() {
     const [Videos, setVideos] = useState([])

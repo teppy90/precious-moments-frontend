@@ -4,13 +4,20 @@ import { Button, Card, Avatar, Col, Typography, Row } from 'antd';
 import moment from "moment";
 import VideoServices from '../../../Services/VideoServices';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
+import UploadVideoPageModal from '../UploadVideoPage/UploadVideoPageModal';
+import EditVideoPageModal from '../../EditVideoPageModal';
 const { Meta } = Card
 
 function UserProfilePri() {
     const { isAuthenticated, user } = useContext(AuthContext);
     const [Videos, setVideos] = useState([]);
+    const [isShowUpload, setShowUpload] = useState(false);
+    const [isShowEdit, setShowEdit] = useState(false);
+    const [forEdit, setForEdit] = useState([]);
+    const [Deleted, setDelete] = useState(false);
 
     useEffect(() => {
+        console.log('hello')
         VideoServices.getByUserID(user._id)
             .then(response => {
                 if (!response.data) {
@@ -19,14 +26,15 @@ function UserProfilePri() {
                     setVideos(response.data)
                 }
             })
-    }, [])
+    }, [forEdit, Deleted])
 
     const createVideo = () => {
-        console.log('hello');
+        setShowUpload(!isShowUpload);
     }
 
-    const editVideo = (videoID, index) => {
-        console.log(`editing ${videoID} with ${index}`)
+    const editVideo = (videoData, index) => {
+        setForEdit(videoData);
+        setShowEdit(!isShowEdit);
     }
 
     const deleteVideo = (videoID, index) => {
@@ -36,7 +44,7 @@ function UserProfilePri() {
                 alert('Failed to delete video')
             } else {
                 alert('Successfully deleted')
-                window.location.reload()
+                setDelete(!Deleted);
             }
         })
     }
@@ -68,7 +76,7 @@ function UserProfilePri() {
                         <div>Date uploaded: {moment(video.createdAt).format("DD-MMM-YYYY")} </div>
                     </div>
                     <div>
-                        <Button type="primary" shape="round" style={{ margin: '0 20px' }} onClick={()=>editVideo(video._id,index)} >Edit</Button>
+                        <Button type="primary" shape="round" style={{ margin: '0 20px' }} onClick={()=>editVideo(video,index)} >Edit</Button>
                         <Button type="danger" shape="round" style={{ margin: '0 20px' }} onClick={()=>deleteVideo(video._id,index)}>Delete</Button>
                     </div>
                 </div>
@@ -111,6 +119,8 @@ function UserProfilePri() {
                     </Row>
                 </div>
             </div>
+                            <UploadVideoPageModal show={isShowUpload} setShow={setShowUpload} />
+                            <EditVideoPageModal show={isShowEdit} setShow={setShowEdit} videoData={forEdit} setVideoData={setForEdit} />
         </div>
     )
 }
