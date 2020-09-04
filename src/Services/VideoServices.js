@@ -34,5 +34,19 @@ export default {
         return Axios.get(`${BACKEND_URL_VIDEOS}/`)
             .then(response => response)
             .catch (err => err)
+    },
+    getByUserID: (userID) => {
+        return Axios.get(`${BACKEND_URL_VIDEOS}/${userID}`)
+            .then(response => response)
+            .catch(err => err)
+    },
+    deleteOneByID: (videoID) => {
+        console.log('delete triggered')
+        return Axios.delete(`${BACKEND_URL_VIDEOS}/${videoID}/delete`)
+            .then(response => {
+                console.log(response)
+                return response
+            })
+            .catch(err => err)
     }
 }

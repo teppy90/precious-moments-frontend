@@ -77,7 +77,7 @@ const Navigationbar = props => {
 
                    
                     <Nav className="ml-auto">
-                    <Nav.Link href={`/${user._id}/userprofile`}> <AccountCircleIcon fontSize="large" />  </Nav.Link>
+                    <Nav.Link href={`/priProfile`}> <AccountCircleIcon fontSize="large" />  </Nav.Link>
 
                     <button type="button"
                         className="btn btn-link nav-link"
