@@ -1,11 +1,9 @@
 import "../components/navbar.css"
-import React, { Component, useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import AuthService from '../Services/AuthServices';
 import { AuthContext } from '../AuthContext';
-import { ButtonGroup, DropdownButton } from 'react-bootstrap';
-import DropdownItem from 'react-bootstrap/esm/DropdownItem';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Form, FormControl, Button } from 'react-bootstrap'
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import UploadVideoPageModal from '../components/views/UploadVideoPage/UploadVideoPageModal';
 
@@ -13,7 +11,6 @@ const Navigationbar = props => {
     const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
     const [isShowUpload, setShowUpload] = useState(false)
     const history = useHistory()
-
 
     const onClickLogoutHandler = () => {
         AuthService.logout().then(data => {
@@ -25,8 +22,6 @@ const Navigationbar = props => {
             }
         })
     }
-
-
 
     // const handleFilter = event => {
     //     event.preventDefault();
@@ -42,7 +37,6 @@ const Navigationbar = props => {
     const unauthenticatedNavBar = () => {
         return (
             <>
-
                 <Navbar className="navbar" bg="light" variant="light">
                     <Navbar.Brand href="/">Precious Moments</Navbar.Brand>
 
@@ -55,9 +49,8 @@ const Navigationbar = props => {
                         <Nav.Link href="/signup">Sign Up</Nav.Link>
                         <Nav.Link href="/login">Login</Nav.Link>
                     </Nav>
-                  
-                </Navbar>
 
+                </Navbar>
             </>
         )
     }
@@ -75,30 +68,26 @@ const Navigationbar = props => {
 
                     </Form>
 
-                   
                     <Nav className="ml-auto">
-        <Nav.Link href={`/priProfile`}> {user? <img src={user.image || "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png"} className="rounded-circle" style={{width:'40px'}}/> : <AccountCircleIcon fontSize="large" /> } </Nav.Link>
+                        <Nav.Link href={`/priProfile`}> {user ? <img src={user.image || "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png"} className="rounded-circle" style={{ width: '40px' }} /> : <AccountCircleIcon fontSize="large" />} </Nav.Link>
 
-
-                    <button type="button"
-                        className="btn btn-link nav-link" onClick={()=>setShowUpload(true)}
-                        >Upload</button>
-                    
                         <button type="button"
-                        className="btn btn-link nav-link"
-                        onClick={onClickLogoutHandler} ><Link to="/">Logout</Link></button>
+                            className="btn btn-link nav-link" onClick={() => setShowUpload(true)}
+                        >Upload</button>
 
+                        <button type="button"
+                            className="btn btn-link nav-link"
+                            onClick={onClickLogoutHandler} ><Link to="/">Logout</Link></button>
                     </Nav>
-               
-                </Navbar>
 
+                </Navbar>
             </>
         )
     }
     return (
         <>
             {!isAuthenticated ? unauthenticatedNavBar() : authenticatedNavBar()}
-        <UploadVideoPageModal show={isShowUpload} setShow={setShowUpload} />
+            {(isShowUpload) ? <UploadVideoPageModal show={isShowUpload} setShow={setShowUpload} /> : ''}
         </>
     )
 }

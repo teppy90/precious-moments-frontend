@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Typography, Button, Form, message, Input } from 'antd';
+import { Typography, Button, Form, Input } from 'antd';
 import Dropzone from 'react-dropzone';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import VideoServices from '../../../Services/VideoServices';
@@ -66,10 +66,10 @@ function UploadVideoPage() {
             formData.append('description', description);
             formData.append('privacy', privacy);
             formData.append('category', category);
-            // setLoading(true);
+            setLoading(true);
             VideoServices.create(formData,bodyData)
                 .then(res => {
-                    // setLoading(false);
+                    setLoading(false);
                     alert(res);
                 })
                 .then(() => {

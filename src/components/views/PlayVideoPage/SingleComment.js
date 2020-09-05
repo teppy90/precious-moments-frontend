@@ -6,15 +6,18 @@ import CommentServices from '../../../Services/CommentServices';
 const { TextArea } = Input;
 
 function SingleComment(props) {
-    const { isAuthenticated, user } = useContext(AuthContext);
-    const [CommentValue, setCommentValue] = useState("")
-    const [OpenReply, setOpenReply] = useState(false)
+    const { user } = useContext(AuthContext);
+    const [CommentValue, setCommentValue] = useState("");
+    const [OpenReply, setOpenReply] = useState(false);
+
     const handleChange = (e) => {
         setCommentValue(e.currentTarget.value)
     }
+
     const openReply = () => {
         setOpenReply(!OpenReply)
     }
+
     const onSubmit = (e) => {
         e.preventDefault();
         const variable = {
@@ -34,6 +37,7 @@ function SingleComment(props) {
                 }
             })
     }
+
     const actions = [
         <span onClick={openReply} key="comment-basic-reply-to">Reply to </span>
     ]
@@ -44,7 +48,7 @@ function SingleComment(props) {
                 author={props.comment.writer.firstName + " " + props.comment.writer.lastName}
                 avatar={
                     <Avatar
-                        src={props.comment.writer.image || "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png" }
+                        src={props.comment.writer.image || "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png"}
                         alt="image"
                     />
                 }

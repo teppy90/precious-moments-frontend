@@ -1,4 +1,4 @@
-import { BACKEND_URL_USERS, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_API } from '../components/constant/constant';
+import { BACKEND_URL_USERS } from '../components/constant/constant';
 import Axios from 'axios';
 
 export default {

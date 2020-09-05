@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Avatar, Col, Typography, Row } from 'antd';
+import { Row } from 'antd';
 import moment from "moment";
 import VideoServices from '../../../Services/VideoServices';
 import UserServices from '../../../Services/UserServices';
-const { Meta } = Card;
 
 function UserProfilePub(props) {
     const [Videos, setVideos] = useState([])
@@ -15,9 +14,9 @@ function UserProfilePub(props) {
                 setVideos(res.data);
             }).then(
                 UserServices.getUserInfo(props.match.params.userID)
-                .then(res => {
-                    setUser(res.data);
-                })
+                    .then(res => {
+                        setUser(res.data);
+                    })
             )
     }, [])
 
@@ -35,22 +34,20 @@ function UserProfilePub(props) {
                     textAlign: 'center',
                     margin: '5px'
                 }}
-                
+                onClick={()=>window.location.href=`/video/${video._id}`}
             >
-                <a href={`/video/${video._id}`}>
-                <div style={{ margin: '10px' }}>
-                    <div>
-                        <video style={{ width: '80%' }}>
-                            <source src={video.video_url} />
-                        </video>
+                    <div style={{ margin: '10px' }}>
+                        <div>
+                            <video style={{ width: '80%' }}>
+                                <source src={video.video_url} />
+                            </video>
+                        </div>
+                        <div style={{ textAlign: 'left', width: '80%' }}>
+                            <div>Title: {video.title}</div>
+                            <div>Total likes: {video.likes}</div>
+                            <div>Date uploaded: {moment(video.createdAt).format("DD-MMM-YYYY")} </div>
+                        </div>
                     </div>
-                    <div style={{ textAlign: 'left', width: '80%' }}>
-                        <div>Title: {video.title}</div>
-                        <div>Total likes: {video.likes}</div>
-                        <div>Date uploaded: {moment(video.createdAt).format("DD-MMM-YYYY")} </div>
-                    </div>
-                </div>
-                </a>
             </div>
         )
     })
@@ -59,14 +56,14 @@ function UserProfilePub(props) {
         <div style={{ width: '85%', margin: '1rem auto' }}>
             <h3>{`${theUser.firstName}'s Profile`}</h3>
             <div style={{ display: 'flex' }}>
-            <div style={{ width: '25%' }} >
+                <div style={{ width: '25%' }} >
                     <div>
                         <img style={{ width: "150px", height: "150px", borderRadius: "80px" }}
-                            src={theUser.image || "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png" } />
+                            src={theUser.image || "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png"} />
                     </div>
-                <div>email: {theUser.email}</div>
-                <div>First Name: {theUser.firstName}</div>
-                <div>Last Name: {theUser.lastName}</div>
+                    <div>email: {theUser.email}</div>
+                    <div>First Name: {theUser.firstName}</div>
+                    <div>Last Name: {theUser.lastName}</div>
                 </div>
                 <div style={{ width: '70%' }} >
                     Videos by {theUser.firstName}

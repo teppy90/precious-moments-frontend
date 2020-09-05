@@ -48,7 +48,7 @@ function EditVideoPageModal(props) {
             .then(res => {
                 alert(res);
                 props.setVideoData([]);
-                props.setShow(false);        
+                props.setShow(false);
             })
     }
 
@@ -82,12 +82,8 @@ function EditVideoPageModal(props) {
                         ))}
                     </select>
                     <br /><br />
-                    <Button type="primary" size="medium" shape="round" onClick={updateVideo} style={{ margin: '0 10px' }}>
-                        Save changes
-            </Button>
-                    <Button type="primary" size="medium" shape="round" onClick={closeModal} style={{ margin: '0 10px' }}>
-                        Cancel
-            </Button>
+                    <Button type="primary" size="medium" shape="round" onClick={updateVideo} style={{ margin: '0 10px' }}>Save changes</Button>
+                    <Button type="primary" size="medium" shape="round" onClick={closeModal} style={{ margin: '0 10px' }}>Cancel</Button>
                 </MDBModalBody>
             </MDBModal>
         </MDBContainer>

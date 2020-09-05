@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { List, Avatar, Typography } from 'antd';
+import { List, Avatar } from 'antd';
 import Comments from "../PlayVideoPage/comment"
-import { Facode } from "react-icons/fa";
-import { Card, CardDeck, Container, Image, Col, Row } from 'react-bootstrap'
-import axios from 'axios';
 import "../PlayVideoPage/PlayVideoPage.css"
 import moment from 'moment';
 import CommentServices from '../../../Services/CommentServices';
@@ -15,11 +12,6 @@ function PlayVideoPage(props) {
     const [Video, setVideo] = useState([])
     const [CommentLists, setCommentLists] = useState([])
     const [isLoaded, setIsLoaded] = useState(false);
-
-    const videoVariable = {
-        videoId: videoId
-        //what should it be we used to identify?
-    }
 
     useEffect(() => {
         VideoServices.getVideo({videoId: videoId})

@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Facode } from "react-icons/fa";
-import { Card, Avatar, Col, Typography, Row } from 'antd';
+import { Typography } from 'antd';
 import 'antd/dist/antd.css'
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import axios from "axios";
-import moment from "moment";
 import '../components/landingpage.css'
 import VideoServices from '../Services/VideoServices';
 
 const { Title } = Typography;
-const { Meta } = Card
 
 function LandingPage(props) {
     const [Videos, setVideos] = useState(null);
@@ -26,17 +22,16 @@ function LandingPage(props) {
                 console.log(response)
                 if (response.data.success) {
                     setVideos(response.data.videos)
-                    setComedy(response.data.videos.filter(video=>video.category==='Comedy'))
-                    setOthers(response.data.videos.filter(video=>video.category==='Others'))
-                    setSports(response.data.videos.filter(video=>video.category==='Sports'))
-                    setMusic(response.data.videos.filter(video=>video.category==='Music'))
-                    setTutorial(response.data.videos.filter(video=>video.category==='Tutorial'))
+                    setComedy(response.data.videos.filter(video => video.category === 'Comedy'))
+                    setOthers(response.data.videos.filter(video => video.category === 'Others'))
+                    setSports(response.data.videos.filter(video => video.category === 'Sports'))
+                    setMusic(response.data.videos.filter(video => video.category === 'Music'))
+                    setTutorial(response.data.videos.filter(video => video.category === 'Tutorial'))
                 } else {
                     alert('Failed to get Videos')
                 }
             })
     }, [])
-
 
     const responsive = {
         superLargeDesktop: {
@@ -66,7 +61,6 @@ function LandingPage(props) {
                         <video width="100%" src={video.video_url} />
                     </a>
                 </div>
-
             )
         }
         )
@@ -116,24 +110,17 @@ function LandingPage(props) {
                 dotListClass="custom-dot-list-style"
                 itemClass="carousel-item-padding-40-px"
             >
-
                 {Videos ? renderCards(Videos) : ''}
-
-
             </Carousel>
 
-        
-            {comedyVideos ? renderCarousel(comedyVideos):''}
-            {sportsVideos ? renderCarousel(sportsVideos):''}
-            {othersVideos ? renderCarousel(othersVideos):''}
-            {musicVideos ? renderCarousel(musicVideos):''}
-            {tutorialVideos ? renderCarousel(tutorialVideos):''}
-
+            {comedyVideos ? renderCarousel(comedyVideos) : ''}
+            {sportsVideos ? renderCarousel(sportsVideos) : ''}
+            {othersVideos ? renderCarousel(othersVideos) : ''}
+            {musicVideos ? renderCarousel(musicVideos) : ''}
+            {tutorialVideos ? renderCarousel(tutorialVideos) : ''}
 
         </div>
     )
-
-
 }
 
 export default LandingPage;

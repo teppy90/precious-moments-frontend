@@ -8,10 +8,8 @@ function ReplyComment(props) {
     const [OpenReplyComments, setOpenReplyComments] = useState(false)
 
     useEffect(() => {
-
         let commentNumber = 0;
         props.CommentLists.map((comment) => {
-
             if (comment.responseTo === props.parentCommentId) {
                 commentNumber++
             }

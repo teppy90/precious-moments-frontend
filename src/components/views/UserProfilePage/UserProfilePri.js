@@ -1,16 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../AuthContext';
-import { Button, Card, Avatar, Col, Typography, Row } from 'antd';
+import { Button, Row } from 'antd';
 import moment from "moment";
 import VideoServices from '../../../Services/VideoServices';
-import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import UploadVideoPageModal from '../UploadVideoPage/UploadVideoPageModal';
 import EditVideoPageModal from '../../EditVideoPageModal';
 
-const { Meta } = Card
-
 function UserProfilePri() {
-    const { isAuthenticated, user } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const [Videos, setVideos] = useState([]);
     const [isShowUpload, setShowUpload] = useState(false);
     const [isShowEdit, setShowEdit] = useState(false);
@@ -40,19 +38,19 @@ function UserProfilePri() {
 
     const deleteVideo = (videoID, index) => {
         VideoServices.deleteOneByID(videoID)
-        .then(response => {
-            if (!response.data) {
-                alert('Failed to delete video')
-            } else {
-                alert('Successfully deleted')
-                setDelete(!Deleted);
-            }
-        })
+            .then(response => {
+                if (!response.data) {
+                    alert('Failed to delete video')
+                } else {
+                    alert('Successfully deleted')
+                    setDelete(!Deleted);
+                }
+            })
     }
 
     useEffect(() => {
         VideoServices.getByUserID(user._id)
-        .then(response => {
+            .then(response => {
                 if (response.status === 200) {
                     console.log(response.data)
                     setVideos(response.data)
@@ -89,8 +87,8 @@ function UserProfilePri() {
                         <div>Date uploaded: {moment(video.createdAt).format("DD-MMM-YYYY")} </div>
                     </div>
                     <div>
-                        <Button type="primary" shape="round" style={{ margin: '0 20px' }} onClick={()=>editVideo(video,index)} >Edit</Button>
-                        <Button type="danger" shape="round" style={{ margin: '0 20px' }} onClick={()=>deleteVideo(video._id,index)}>Delete</Button>
+                        <Button type="primary" shape="round" style={{ margin: '0 20px' }} onClick={() => editVideo(video, index)} >Edit</Button>
+                        <Button type="danger" shape="round" style={{ margin: '0 20px' }} onClick={() => deleteVideo(video._id, index)}>Delete</Button>
                     </div>
                 </div>
             </div>
@@ -98,42 +96,42 @@ function UserProfilePri() {
     })
 
     return (
-        <div style={{ width: '85%', margin: '1rem auto'}}>
+        <div style={{ width: '85%', margin: '1rem auto' }}>
             <h3>My Profile</h3>
             <div style={{ display: 'flex' }}>
                 <div style={{ width: '25%' }} >
                     <div>
                         <img style={{ width: "150px", height: "150px", borderRadius: "80px" }}
-                            src={user.image || "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png" } />
+                            src={user.image || "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png"} />
                     </div>
-                <div>email: {user.email}</div>
-                <div>First Name: {user.firstName}</div>
-                <div>Last Name: {user.lastName}</div>
+                    <div>email: {user.email}</div>
+                    <div>First Name: {user.firstName}</div>
+                    <div>Last Name: {user.lastName}</div>
                 </div>
                 <div style={{ width: '70%' }} >
                     <h4>My uploaded videos</h4>
                     <Row>
                         <div
-                        onClick={createVideo}
-                        style={{
-                            width: '150px',
-                            height: '250px',
-                            border: '2px dashed #676CFB',
-                            borderRadius: '25px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            textAlign: 'center',
-                            margin: '5px'
-                        }}>
+                            onClick={createVideo}
+                            style={{
+                                width: '150px',
+                                height: '250px',
+                                border: '2px dashed #676CFB',
+                                borderRadius: '25px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                textAlign: 'center',
+                                margin: '5px'
+                            }}>
                             <PlusOutlined style={{ position: 'unset' }} />
                         </div>
                         {renderCards}
                     </Row>
                 </div>
             </div>
-                            <UploadVideoPageModal show={isShowUpload} setShow={setShowUpload} />
-                            <EditVideoPageModal show={isShowEdit} setShow={setShowEdit} videoData={forEdit} setVideoData={setForEdit} />
+            {(isShowUpload) ? <UploadVideoPageModal show={isShowUpload} setShow={setShowUpload} /> : ''}
+            {(isShowEdit) ? <EditVideoPageModal show={isShowEdit} setShow={setShowEdit} videoData={forEdit} setVideoData={setForEdit} /> : ''}
         </div>
     )
 }
