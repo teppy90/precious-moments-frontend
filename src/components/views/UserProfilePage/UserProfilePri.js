@@ -1,12 +1,27 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../../AuthContext';
 import { Card, Avatar, Col, Typography, Row } from 'antd';
 import moment from "moment";
+import VideoServices from "../../../Services/VideoServices"
 const { Meta } = Card
 
 function UserProfilePri() {
     const { isAuthenticated, user } = useContext(AuthContext);
     const [Videos, setVideos] = useState([]);
+
+    useEffect(() => {
+        VideoServices.getByUserID(user._id)
+        
+            .then(response => {
+                console.log(response)
+                if (response.data.status === 200) {
+                    console.log(response.data.result)
+                    setVideos(response.data.result)
+                } else {
+                    alert('Failed to get Videos')
+                }
+            })
+    }, [])
 
     const renderCards = Videos.map((video, index) => {
 

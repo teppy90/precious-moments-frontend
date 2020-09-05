@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import SingleComment from '../components/SingleComment'
+import SingleComment from '../../views/PlayVideoPage/SingleComment'
 import 'antd/dist/antd.css'
 
 function ReplyComment(props) {

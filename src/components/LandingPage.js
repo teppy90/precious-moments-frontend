@@ -37,7 +37,7 @@ function LandingPage(props) {
         },
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
-            items: 3
+            items: 4
         },
         tablet: {
             breakpoint: { max: 1024, min: 464 },
@@ -58,8 +58,8 @@ function LandingPage(props) {
 
             <div className='item'>
 
-                <a href={`${video._id}/video`} >
-                    <video width="320" height="240" src={video.video_url} />
+                <a href={`/video/${video._id}`} >
+                    <video width="300" height="240" src={video.video_url} />
                 </a>
 
 
@@ -77,7 +77,7 @@ function LandingPage(props) {
 
         <div style={{ width: '85%', margin: '2rem auto' }}>
             <Title level={2} > Recommended </Title>
-            <Carousel style={{ width: '100%', margin: '2rem auto' }} className='container-md'
+            <Carousel className='container'
                 swipeable={false}
                 draggable={false}
                 responsive={responsive}
