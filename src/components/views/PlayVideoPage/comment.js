@@ -9,9 +9,11 @@ const { TextArea } = Input;
 function Comments(props) {
     const { isAuthenticated, user } = useContext(AuthContext);
     const [Comment, setComment] = useState("");
+
     const handleChange = (e) => {
         setComment(e.currentTarget.value)
     }
+
     const onSubmit = (e) => {
         e.preventDefault();
         const variable = {
@@ -19,7 +21,7 @@ function Comments(props) {
             writer: user._id,
             postId: props.postId      
         }
-        CommentServices.getAllCommentsinOneVideo(variable)
+        CommentServices.saveComments(variable)
             .then(response => {
                 if (response.data.success) {
                     setComment("")
@@ -30,6 +32,7 @@ function Comments(props) {
                 }
             })
     }
+
     return (
         <div>
             <br />

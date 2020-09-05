@@ -35,7 +35,9 @@ function UserProfilePub(props) {
                     textAlign: 'center',
                     margin: '5px'
                 }}
+                
             >
+                <a href={`/video/${video._id}`}>
                 <div style={{ margin: '10px' }}>
                     <div>
                         <video style={{ width: '80%' }}>
@@ -48,6 +50,7 @@ function UserProfilePub(props) {
                         <div>Date uploaded: {moment(video.createdAt).format("DD-MMM-YYYY")} </div>
                     </div>
                 </div>
+                </a>
             </div>
         )
     })

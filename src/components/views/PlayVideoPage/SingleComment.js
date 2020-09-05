@@ -44,7 +44,7 @@ function SingleComment(props) {
                 author={props.comment.writer.firstName + " " + props.comment.writer.lastName}
                 avatar={
                     <Avatar
-                        src={props.comment.writer.image}
+                        src={props.comment.writer.image || "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png" }
                         alt="image"
                     />
                 }
