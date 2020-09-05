@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { AuthContext } from "../AuthContext"
+import { AuthContext } from "../../../AuthContext"
 import { Comment, Avatar, Button, Input } from 'antd'
 import 'antd/dist/antd.css'
 import axios from 'axios'

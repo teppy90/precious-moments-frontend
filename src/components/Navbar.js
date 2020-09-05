@@ -1,5 +1,5 @@
 import "../components/navbar.css"
-import React, { Component, useContext, useState } from 'react';
+import React, { Component, useContext, useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import AuthService from '../Services/AuthServices';
 import { AuthContext } from '../AuthContext';
@@ -7,11 +7,13 @@ import { ButtonGroup, DropdownButton } from 'react-bootstrap';
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Form, FormControl, Button } from 'react-bootstrap'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import axios from 'axios';
 
 const Navigationbar = props => {
     const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
-    // let [dropDownValue, setDropDownValue] = useState("Please select one of the following");
+
     const history = useHistory()
+
 
     const onClickLogoutHandler = () => {
         AuthService.logout().then(data => {
@@ -77,7 +79,7 @@ const Navigationbar = props => {
 
                    
                     <Nav className="ml-auto">
-                    <Nav.Link href={`/${user._id}/userprofile`}> <AccountCircleIcon fontSize="large" />  </Nav.Link>
+                    <Nav.Link href={`//priProf`}> <AccountCircleIcon fontSize="large" />  </Nav.Link>
 
                     <button type="button"
                         className="btn btn-link nav-link"

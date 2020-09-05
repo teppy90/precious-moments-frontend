@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { Button, Input } from 'antd';
 import axios from 'axios';
-import { AuthContext } from "../AuthContext"
-import SingleComment from "../components/SingleComment"
-import ReplyComment from "../components/replycomment"
+import { AuthContext } from "../../../AuthContext"
+import SingleComment from "../PlayVideoPage/SingleComment"
+import ReplyComment from "../PlayVideoPage/replycomment"
 const { TextArea } = Input;
 
 function Comments(props) {
@@ -39,7 +39,7 @@ function Comments(props) {
 
         <div>
             <br />
-            <p>replies</p>
+            <h4>Comment</h4>
             <hr />
             {/* Comment Lists */}
             {/*Root Comment Form*/}
