@@ -64,7 +64,7 @@ function PlayVideoPage(props) {
                 actions={[]}
             >
                 <List.Item.Meta
-                    avatar={<Avatar src={Video.writer && Video.writer.image}   />}
+                    avatar={<Avatar src={(Video.writer && Video.writer.image)|| "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png" }   />}
                     title={<a href={`/${Video.writer._id}/pubProf`}> {Video.writer.firstName + " " + Video.writer.lastName}</a>}
                     description={Video.description}
                 />
