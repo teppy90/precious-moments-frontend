@@ -52,12 +52,10 @@ function UserProfilePri() {
 
     useEffect(() => {
         VideoServices.getByUserID(user._id)
-        
-            .then(response => {
-                console.log(response)
-                if (response.data.status === 200) {
-                    console.log(response.data.result)
-                    setVideos(response.data.result)
+        .then(response => {
+                if (response.status === 200) {
+                    console.log(response.data)
+                    setVideos(response.data)
                 } else {
                     alert('Failed to get Videos')
                 }
