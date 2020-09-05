@@ -1,47 +1,72 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Avatar, Col, Typography, Row } from 'antd';
 import moment from "moment";
+import VideoServices from '../../../Services/VideoServices';
+import UserServices from '../../../Services/UserServices';
 const { Meta } = Card;
 
-function UserProfilePub() {
+function UserProfilePub(props) {
     const [Videos, setVideos] = useState([])
     const [theUser, setUser] = useState([])
 
     useEffect(() => {
-        console.log('hello')
+        VideoServices.getByUserID(props.match.params.userID)
+            .then(res => {
+                setVideos(res.data);
+            }).then(
+                UserServices.getUserInfo(props.match.params.userID)
+                .then(res => {
+                    setUser(res.data);
+                })
+            )
     }, [])
 
     const renderCards = Videos.map((video, index) => {
 
         return (
-            <Col lg={6} md={8} xs={24}>
-                <div style={{ position: 'relative' }}>
-                    <video>
-                        <source src={video.video_url} />
-                    </video>
-                </div><br />
-                <Meta
-                    avatar={
-                        <Avatar src={theUser.image_url} />
-                    }
-                    title={video.title}
-                />
-                <span>{theUser.name} </span><br />
-                <span style={{ marginLeft: '3rem' }}> {video.views}</span>
-                - <span> {moment(video.createdAt).format("MMM Do YY")} </span>
-            </Col>
+            <div
+                style={{
+                    width: '300px',
+                    height: '250px',
+                    border: '2px solid #676CFB',
+                    borderRadius: '25px',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    textAlign: 'center',
+                    margin: '5px'
+                }}
+            >
+                <div style={{ margin: '10px' }}>
+                    <div>
+                        <video style={{ width: '80%' }}>
+                            <source src={video.video_url} />
+                        </video>
+                    </div>
+                    <div style={{ textAlign: 'left', width: '80%' }}>
+                        <div>Title: {video.title}</div>
+                        <div>Total likes: {video.likes}</div>
+                        <div>Date uploaded: {moment(video.createdAt).format("DD-MMM-YYYY")} </div>
+                    </div>
+                </div>
+            </div>
         )
     })
 
     return (
         <div style={{ width: '85%', margin: '1rem auto' }}>
-            <h3>User's Profile</h3>
+            <h3>{`${theUser.firstName}'s Profile`}</h3>
             <div style={{ display: 'flex' }}>
-                <div style={{ width: '25%' }} >
-                    My Photo
-            </div>
-                <div style={{ width: '60%' }} >
-                    Videos by user's name
+            <div style={{ width: '25%' }} >
+                    <div>
+                        <img style={{ width: "150px", height: "150px", borderRadius: "80px" }}
+                            src={theUser.picture || "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png" } />
+                    </div>
+                <div>email: {theUser.email}</div>
+                <div>First Name: {theUser.firstName}</div>
+                <div>Last Name: {theUser.lastName}</div>
+                </div>
+                <div style={{ width: '70%' }} >
+                    Videos by {theUser.firstName}
                     <Row>
                         {renderCards}
                     </Row>

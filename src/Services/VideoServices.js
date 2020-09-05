@@ -36,6 +36,7 @@ export default {
             .catch(err => err)
     },
     getByUserID: (userID) => {
+        console.log(userID)
         return Axios.get(`${BACKEND_URL_VIDEOS}/${userID}`)
             .then(response => response)
             .catch(err => err)
