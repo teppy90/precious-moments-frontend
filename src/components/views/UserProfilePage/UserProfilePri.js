@@ -104,7 +104,7 @@ function UserProfilePri() {
                 <div style={{ width: '25%' }} >
                     <div>
                         <img style={{ width: "150px", height: "150px", borderRadius: "80px" }}
-                            src={user.picture || "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png" } />
+                            src={user.image || "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png" } />
                     </div>
                 <div>email: {user.email}</div>
                 <div>First Name: {user.firstName}</div>

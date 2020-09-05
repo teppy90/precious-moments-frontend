@@ -63,7 +63,6 @@ const Navigationbar = props => {
     }
 
     const authenticatedNavBar = () => {
-        console.log(user)
         return (
             <>
 
@@ -78,7 +77,7 @@ const Navigationbar = props => {
 
                    
                     <Nav className="ml-auto">
-                    <Nav.Link href={`/priProfile`}> <AccountCircleIcon fontSize="large" />  </Nav.Link>
+        <Nav.Link href={`/priProfile`}> {user? <img src={user.image || "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png"} className="rounded-circle" style={{width:'40px'}}/> : <AccountCircleIcon fontSize="large" /> } </Nav.Link>
 
 
                     <button type="button"

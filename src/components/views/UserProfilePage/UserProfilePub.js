@@ -59,7 +59,7 @@ function UserProfilePub(props) {
             <div style={{ width: '25%' }} >
                     <div>
                         <img style={{ width: "150px", height: "150px", borderRadius: "80px" }}
-                            src={theUser.picture || "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png" } />
+                            src={theUser.image || "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png" } />
                     </div>
                 <div>email: {theUser.email}</div>
                 <div>First Name: {theUser.firstName}</div>
