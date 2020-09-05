@@ -90,7 +90,6 @@ const Navigationbar = props => {
 
                     </Nav>
                
-                    <UploadVideoPageModal show={isShowUpload} setShow={setShowUpload} />
                 </Navbar>
 
             </>
@@ -99,6 +98,7 @@ const Navigationbar = props => {
     return (
         <>
             {!isAuthenticated ? unauthenticatedNavBar() : authenticatedNavBar()}
+        <UploadVideoPageModal show={isShowUpload} setShow={setShowUpload} />
         </>
     )
 }
