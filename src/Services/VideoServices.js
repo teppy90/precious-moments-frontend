@@ -55,5 +55,13 @@ export default {
                 return response
             })
             .catch(err => err)
-    }
+    },
+    getVideo: (videoID) => {
+        return Axios.post(`${BACKEND_URL_VIDEOS}/getVideo`, videoID)
+        .then(response => {
+            console.log(response)
+            return response
+        })
+        .catch(err => err)
+}
 }

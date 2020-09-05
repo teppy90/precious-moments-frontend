@@ -122,11 +122,13 @@ function LandingPage(props) {
 
             </Carousel>
 
+        
             {comedyVideos ? renderCarousel(comedyVideos):''}
             {sportsVideos ? renderCarousel(sportsVideos):''}
             {othersVideos ? renderCarousel(othersVideos):''}
             {musicVideos ? renderCarousel(musicVideos):''}
             {tutorialVideos ? renderCarousel(tutorialVideos):''}
+
 
         </div>
     )

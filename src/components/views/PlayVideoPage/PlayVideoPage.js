@@ -6,6 +6,8 @@ import { Card, CardDeck, Container, Image, Col, Row } from 'react-bootstrap'
 import axios from 'axios';
 import "../PlayVideoPage/PlayVideoPage.css"
 import moment from 'moment';
+import CommentServices from '../../../Services/CommentServices';
+import VideoServices from '../../../Services/VideoServices'
 
 function PlayVideoPage(props) {
 
@@ -20,7 +22,7 @@ function PlayVideoPage(props) {
     }
 
     useEffect(() => {
-        axios.post('http://localhost:3002/videos/getVideo', {videoId: videoId})
+        VideoServices.getVideo({videoId: videoId})
         .then(response => {
             if(response.data.success) {
                 console.log(response.data.video)
@@ -31,7 +33,7 @@ function PlayVideoPage(props) {
             }
         })
 
-        axios.post('http://localhost:3002/comments/getcomments', {postId: videoId})
+        CommentServices.getAllCommentsinOneVideo({postId: videoId})
         .then(response => {
             if (response.data.success) {
                 console.log('response.data.comments', response.data.result)
