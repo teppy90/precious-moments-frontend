@@ -133,10 +133,6 @@ function UploadVideoPageModal(props) {
             text='Uploading video...'
         >
             <MDBContainer>
-                {/* <div style={{ maxWidth: '700px', margin: '2rem auto' }}> */}
-                {/* <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                        <Title level={2} > Upload Video</Title>
-                    </div> */}
                 <MDBModal isOpen={props.show} toggle={toggle}>
                     <MDBModalHeader>Upload Video</MDBModalHeader>
                     <MDBModalBody>
@@ -198,7 +194,6 @@ function UploadVideoPageModal(props) {
                         </Form>
                     </MDBModalBody>
                 </MDBModal>
-                {/* </div> */}
             </MDBContainer>
         </LoadingOverlay>
 
