@@ -25,7 +25,6 @@ function PlayVideoPage(props) {
             if(response.data.success) {
                 console.log(response.data.video)
                 setVideo(response.data.video)
-                console.log(response.data.video.writer.lastName)
                 setIsLoaded(true);
             } else {
                 alert('Failed to get video Info')
