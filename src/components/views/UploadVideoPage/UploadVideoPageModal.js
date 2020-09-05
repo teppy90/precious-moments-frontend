@@ -51,6 +51,7 @@ function UploadVideoPageModal(props) {
         } else if (!videoFile) {
             alert('Please attach a video file')
         } else {
+            setLoading(true);
             let bodyData = new Object();
             bodyData.title = title;
             bodyData.description = description;
@@ -60,15 +61,16 @@ function UploadVideoPageModal(props) {
             formData.append('title', title);
             formData.append('description', description);
             formData.append('category', category);
-            setLoading(true);
             VideoServices.create(formData, bodyData)
-                .then(res => {
+            .then(res => {
+                if (res.ok) {
+                    alert('video successfully uploaded!')
                     setLoading(false);
-                    alert(res);
+                    props.setShow(!props.show);
+                    } else {
+                        alert(res);
+                    }
                 })
-                .then(() => {
-                    console.log('hello')
-                });
         }
     }
 
@@ -127,12 +129,13 @@ function UploadVideoPageModal(props) {
     }
 
     return (
-        <LoadingOverlay
+        
+            <MDBContainer>
+                {/* <LoadingOverlay
             active={isLoading}
             spinner
             text='Uploading video...'
-        >
-            <MDBContainer>
+        > */}
                 <MDBModal isOpen={props.show} toggle={toggle}>
                     <MDBModalHeader>Upload Video</MDBModalHeader>
                     <MDBModalBody>
@@ -181,24 +184,21 @@ function UploadVideoPageModal(props) {
                             <label>Video Category:   </label>
                             <select onChange={handleChangeCategory}>
                                 {Category.map((item, index) => (
-                                    <option key={index} value={item.label} selected={item.label==="Others"? "selected": ""}>{item.label}</option>
+                                    <option key={index} value={item.label} selected={item.label === "Others" ? "selected" : ""}>{item.label}</option>
                                 ))}
                             </select>
                             <br /><br />
-                                <Button type="primary" size="large" shape="round" onClick={createVideo} style={{margin:'0 10px'}}>
-                                    Submit
-            </Button>
-                                <Button type="primary" size="large" shape="round" onClick={closeModal} style={{margin:'0 10px'}}>
-                                    Cancel
+                                {isLoading? <Button type="primary" shape="round" size="large" loading>Uploading</Button> : <Button type="primary" size="large" shape="round" onClick={createVideo} style={{ margin: '0 10px' }}>Submit</Button> }
+                            <Button type="primary" size="large" shape="round" onClick={closeModal} style={{ margin: '0 10px' }}>
+                                Cancel
             </Button>
                         </Form>
                     </MDBModalBody>
                 </MDBModal>
+                {/* </LoadingOverlay> */}
             </MDBContainer>
-        </LoadingOverlay>
-
-
     )
 }
 
 export default UploadVideoPageModal
+
