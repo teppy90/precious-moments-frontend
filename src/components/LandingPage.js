@@ -13,14 +13,24 @@ const { Title } = Typography;
 const { Meta } = Card
 
 function LandingPage(props) {
-    const [Videos, setVideos] = useState([])
-
+    const [Videos, setVideos] = useState(null);
+    const [comedyVideos, setComedy] = useState(null);
+    const [othersVideos, setOthers] = useState(null);
+    const [sportsVideos, setSports] = useState(null);
+    const [musicVideos, setMusic] = useState(null);
+    const [tutorialVideos, setTutorial] = useState(null);
 
     useEffect(() => {
         VideoServices.getAll()
             .then(response => {
+                console.log(response)
                 if (response.data.success) {
                     setVideos(response.data.videos)
+                    setComedy(response.data.videos.filter(video=>video.category==='Comedy'))
+                    setOthers(response.data.videos.filter(video=>video.category==='Others'))
+                    setSports(response.data.videos.filter(video=>video.category==='Sports'))
+                    setMusic(response.data.videos.filter(video=>video.category==='Music'))
+                    setTutorial(response.data.videos.filter(video=>video.category==='Tutorial'))
                 } else {
                     alert('Failed to get Videos')
                 }
@@ -48,28 +58,47 @@ function LandingPage(props) {
         }
     };
 
+    const renderCards = (data) => {
+        return data.map((video, index) => {
+            return (
+                <div className='item'>
+                    <a href={`/video/${video._id}`} >
+                        <video width="100%" src={video.video_url} />
+                    </a>
+                </div>
 
-
-    function renderCards(data){
-        data.map((video, index) => {
-        return (
-
-            <div className='item'>
-
-                <a href={`/video/${video._id}`} >
-                    <video width="100%" src={video.video_url} />
-                </a>
-            </div>
-
+            )
+        }
         )
-        
-    })}
+    }
 
-
-
+    const renderCarousel = (data) => {
+        return (
+            data[0] &&
+            <>
+                <Title level={2} > {data[0].category} </Title>
+                <Carousel className='container'
+                    swipeable={true}
+                    draggable={true}
+                    responsive={responsive}
+                    ssr={true} // means to render carousel on server-side.
+                    infinite={true}
+                    keyBoardControl={true}
+                    customTransition="all .5"
+                    transitionDuration={500}
+                    containerClass="carousel-container"
+                    removeArrowOnDeviceType={["tablet", "mobile"]}
+                    deviceType={props.deviceType}
+                    dotListClass="custom-dot-list-style"
+                    itemClass="carousel-item-padding-40-px"
+                >
+                    {renderCards(data)}
+                </Carousel>
+            </>
+        )
+    }
 
     return (
-
         <div style={{ width: '85%', margin: '2rem auto' }}>
             <Title level={2} > Recommended </Title>
             <Carousel className='container'
@@ -87,11 +116,18 @@ function LandingPage(props) {
                 dotListClass="custom-dot-list-style"
                 itemClass="carousel-item-padding-40-px"
             >
-                {console.log(Videos)}
-                {renderCards (Videos )}
+
+                {Videos ? renderCards(Videos) : ''}
 
 
             </Carousel>
+
+            {comedyVideos ? renderCarousel(comedyVideos):''}
+            {sportsVideos ? renderCarousel(sportsVideos):''}
+            {othersVideos ? renderCarousel(othersVideos):''}
+            {musicVideos ? renderCarousel(musicVideos):''}
+            {tutorialVideos ? renderCarousel(tutorialVideos):''}
+
         </div>
     )
 
