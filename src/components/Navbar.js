@@ -7,11 +7,11 @@ import { ButtonGroup, DropdownButton } from 'react-bootstrap';
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Form, FormControl, Button } from 'react-bootstrap'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import axios from 'axios';
+import UploadVideoPageModal from '../components/views/UploadVideoPage/UploadVideoPageModal';
 
 const Navigationbar = props => {
     const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
-
+    const [isShowUpload, setShowUpload] = useState(false)
     const history = useHistory()
 
 
@@ -79,11 +79,12 @@ const Navigationbar = props => {
 
                    
                     <Nav className="ml-auto">
-                    <Nav.Link href={`//priProf`}> <AccountCircleIcon fontSize="large" />  </Nav.Link>
+                    <Nav.Link href={`/priProfile`}> <AccountCircleIcon fontSize="large" />  </Nav.Link>
+
 
                     <button type="button"
-                        className="btn btn-link nav-link"
-                        ><Link to="/upload">Upload</Link></button>
+                        className="btn btn-link nav-link" onClick={()=>setShowUpload(true)}
+                        >Upload</button>
                     
                         <button type="button"
                         className="btn btn-link nav-link"
@@ -91,8 +92,7 @@ const Navigationbar = props => {
 
                     </Nav>
                
-
-
+                    <UploadVideoPageModal show={isShowUpload} setShow={setShowUpload} />
                 </Navbar>
 
             </>

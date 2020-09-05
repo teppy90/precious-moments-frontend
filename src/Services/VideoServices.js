@@ -33,6 +33,29 @@ export default {
     getAll: () => {
         return Axios.get(`${BACKEND_URL_VIDEOS}/`)
             .then(response => response)
-            .catch (err => err)
+            .catch(err => err)
+    },
+    getByUserID: (userID) => {
+        console.log(userID)
+        return Axios.get(`${BACKEND_URL_VIDEOS}/${userID}`)
+            .then(response => response)
+            .catch(err => err)
+    },
+    deleteOneByID: (videoID) => {
+        return Axios.delete(`${BACKEND_URL_VIDEOS}/${videoID}/delete`)
+            .then(response => {
+                console.log(response)
+                return response
+            })
+            .catch(err => err)
+    },
+    updateOneByID: (videoID, data) => {
+        console.log(data)
+        return Axios.put(`${BACKEND_URL_VIDEOS}/${videoID}/update`, data)
+            .then(response => {
+                console.log(response)
+                return response
+            })
+            .catch(err => err)
     }
 }
