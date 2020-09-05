@@ -58,13 +58,13 @@ function PlayVideoPage(props) {
 
            {console.log(Video)}
             <h2>{Video.title}</h2>
-            <h5>{moment(Video.createdAt).format("")}</h5>
+            <h5>{moment(Video.createdAt).format("LL")}</h5>
             <List.Item
                 actions={[]}
             >
                 <List.Item.Meta
                     avatar={<Avatar src={Video.writer && Video.writer.image}   />}
-                    title={<a href="/priProfile"> Video.writer.firstName + " " + Video.writer.lastName</a>}
+                    title={<a href={`/${Video.writer._id}/pubProf`}> {Video.writer.firstName + " " + Video.writer.lastName}</a>}
                     description={Video.description}
                 />
                 <div></div>
