@@ -1,5 +1,5 @@
 import "../components/navbar.css"
-import React, { useContext, useState } from 'react';
+import React, { Component, useContext, useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import AuthService from '../Services/AuthServices';
 import { AuthContext } from '../AuthContext';
@@ -11,8 +11,9 @@ import UploadVideoPageModal from '../components/views/UploadVideoPage/UploadVide
 
 const Navigationbar = props => {
     const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
-    const [isShowUpload, setShowUpload] = useState(false);
+    const [isShowUpload, setShowUpload] = useState(false)
     const history = useHistory()
+
 
     const onClickLogoutHandler = () => {
         AuthService.logout().then(data => {
@@ -79,6 +80,7 @@ const Navigationbar = props => {
                    
                     <Nav className="ml-auto">
                     <Nav.Link href={`/priProfile`}> <AccountCircleIcon fontSize="large" />  </Nav.Link>
+
 
                     <button type="button"
                         className="btn btn-link nav-link" onClick={()=>setShowUpload(true)}

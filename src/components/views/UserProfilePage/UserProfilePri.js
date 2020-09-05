@@ -6,6 +6,7 @@ import VideoServices from '../../../Services/VideoServices';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import UploadVideoPageModal from '../UploadVideoPage/UploadVideoPageModal';
 import EditVideoPageModal from '../../EditVideoPageModal';
+
 const { Meta } = Card
 
 function UserProfilePri() {
@@ -48,6 +49,20 @@ function UserProfilePri() {
             }
         })
     }
+
+    useEffect(() => {
+        VideoServices.getByUserID(user._id)
+        
+            .then(response => {
+                console.log(response)
+                if (response.data.status === 200) {
+                    console.log(response.data.result)
+                    setVideos(response.data.result)
+                } else {
+                    alert('Failed to get Videos')
+                }
+            })
+    }, [])
 
     const renderCards = Videos.map((video, index) => {
 
