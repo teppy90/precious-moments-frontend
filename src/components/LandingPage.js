@@ -50,24 +50,20 @@ function LandingPage(props) {
 
 
 
-    const renderCards = Videos.map((video, index) => {
-
-
+    function renderCards(data){
+        data.map((video, index) => {
         return (
 
             <div className='item'>
 
                 <a href={`/video/${video._id}`} >
-                    <video width="300" height="240" src={video.video_url} />
+                    <video width="100%" src={video.video_url} />
                 </a>
-
-
-
             </div>
 
         )
-
-    })
+        
+    })}
 
 
 
@@ -77,8 +73,8 @@ function LandingPage(props) {
         <div style={{ width: '85%', margin: '2rem auto' }}>
             <Title level={2} > Recommended </Title>
             <Carousel className='container'
-                swipeable={false}
-                draggable={false}
+                swipeable={true}
+                draggable={true}
                 responsive={responsive}
                 ssr={true} // means to render carousel on server-side.
                 infinite={true}
@@ -91,17 +87,12 @@ function LandingPage(props) {
                 dotListClass="custom-dot-list-style"
                 itemClass="carousel-item-padding-40-px"
             >
-
-                {renderCards}
+                {console.log(Videos)}
+                {renderCards (Videos )}
 
 
             </Carousel>
-
-
-
-
         </div>
-
     )
 
 
