@@ -4,6 +4,7 @@ import axios from 'axios';
 import { AuthContext } from "../../../AuthContext"
 import SingleComment from "../PlayVideoPage/SingleComment"
 import ReplyComment from "../PlayVideoPage/replycomment"
+import CommentServices from '../../../Services/CommentServices';
 const { TextArea } = Input;
 
 function Comments(props) {
@@ -23,7 +24,7 @@ function Comments(props) {
             postId: props.postId      
         }
 
-        axios.post('http://localhost:3002/comments/savecomment', variable)
+        CommentServices.getAllCommentsinOneVideo(variable)
             .then(response => {
                 if (response.data.success) {
                     setComment("")

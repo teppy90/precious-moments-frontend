@@ -3,6 +3,7 @@ import { AuthContext } from "../../../AuthContext"
 import { Comment, Avatar, Button, Input } from 'antd'
 import 'antd/dist/antd.css'
 import axios from 'axios'
+import CommentServices from '../../../Services/CommentServices';
 
 const { TextArea } = Input;
 
@@ -32,7 +33,7 @@ function SingleComment(props) {
             content: CommentValue
         }
 
-        axios.post('http://localhost:3002/comments/savecomment', variable)
+        CommentServices.saveComments(variable)
             .then(response => {
                 if (response.data.success) {
                     setCommentValue("")
