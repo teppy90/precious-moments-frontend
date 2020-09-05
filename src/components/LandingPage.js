@@ -129,7 +129,6 @@ function LandingPage(props) {
             {tutorialVideos ? renderCarousel(tutorialVideos):''}
 
         </div>
-
     )
 
 
