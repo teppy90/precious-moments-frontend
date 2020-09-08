@@ -61,7 +61,7 @@ function EditVideoPageModal(props) {
         props.videoData &&
         <MDBContainer>
             <MDBModal isOpen={props.show} toggle={toggle}>
-                <MDBModalHeader>Edit Video</MDBModalHeader>
+                <MDBModalHeader style={{backgroundColor:'#676CFB'}} ><span style={{color:"white"}}>Edit Video</span></MDBModalHeader>
                 <MDBModalBody>
                     <label>Video Title</label>
                     <Input
