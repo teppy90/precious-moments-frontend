@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Tooltip } from 'antd';
 import Icon from '@ant-design/icons';
 import Axios from 'axios';
-import LikeDislikesServices from '../../../Services/LikeDislikeServices'
+// import LikeDislikesServices from '../../../Services/LikeDislikeServices'
 
 function LikeDislikes(props) {
     const [Likes, setLikes] = useState(0)
