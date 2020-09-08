@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { AuthContext } from "../../../AuthContext"
 import { Comment, Avatar, Button, Input } from 'antd'
 import 'antd/dist/antd.css'
+import LikeDislikes from './LikeDislikes'
 import CommentServices from '../../../Services/CommentServices';
 import {useHistory} from 'react-router-dom';
 
@@ -82,8 +83,10 @@ function SingleComment(props) {
     }
 
     const actions = [
+        <LikeDislikes comment commentId={props.comment._id} userId={localStorage.getItem('userId')} />,
         <span onClick={openReply} key="comment-basic-reply-to">Reply to </span>
     ]
+
     return (
         <div>
             {console.log(isAuthenticated)}

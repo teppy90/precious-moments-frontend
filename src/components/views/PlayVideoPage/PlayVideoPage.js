@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { List, Avatar } from 'antd';
 import Comments from "../PlayVideoPage/comment"
-import "../PlayVideoPage/PlayVideoPage.css"
+import LikeDislikes from './LikeDislikes';
+import "../PlayVideoPage/PlayVideoPage.css";
 import moment from 'moment';
 import CommentServices from '../../../Services/CommentServices';
-import VideoServices from '../../../Services/VideoServices'
+import VideoServices from '../../../Services/VideoServices';
 
 function PlayVideoPage(props) {
 
@@ -53,8 +54,8 @@ function PlayVideoPage(props) {
             <h2>{Video.title}</h2>
             <h5>{moment(Video.createdAt).format("LL")}</h5>
             <List.Item
-                actions={[]}
-            >
+                            actions={[<LikeDislikes video videoId={videoId} userId={localStorage.getItem('userId')}  />]}
+                        >
                 <List.Item.Meta
                     avatar={<Avatar src={(Video.writer && Video.writer.image)|| "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png" }   />}
                     title={<a href={`/${Video.writer._id}/pubProf`}> {Video.writer.firstName + " " + Video.writer.lastName}</a>}
