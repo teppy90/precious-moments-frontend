@@ -14,6 +14,7 @@ function PlayVideoPage(props) {
     const [CommentLists, setCommentLists] = useState([])
     const [isLoaded, setIsLoaded] = useState(false);
 
+
     useEffect(() => {
         VideoServices.getVideo({videoId: videoId})
         .then(response => {
@@ -36,7 +37,7 @@ function PlayVideoPage(props) {
             }
         })
 
-    }, [])
+
 
     const updateComment = (newComment) => {
         console.log(newComment)
@@ -56,7 +57,7 @@ function PlayVideoPage(props) {
 
             
             <List.Item
-                            actions={[<LikeDislikes video videoId={videoId} userId={localStorage.getItem('userId')}  />]}
+                            actions={[<LikeDislikes videoId={videoId} userId={localStorage.getItem('userId')}  />]}
                         >
                 <List.Item.Meta
                     avatar={<Avatar src={(Video.writer && Video.writer.image)|| "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png" }   />}
@@ -70,6 +71,7 @@ function PlayVideoPage(props) {
 
         </div>
     )
-}
+  }
+)}
 
 export default PlayVideoPage

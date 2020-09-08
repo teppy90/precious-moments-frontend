@@ -3,12 +3,12 @@ import Axios from 'axios';
 
 export default {
     getAllLikesinOneVideo: (variable) => {
-        return Axios.post(`${BACKEND_URL_LIKES}/likes`, variable )
+        return Axios.post(`${BACKEND_URL_LIKES}/getLikes`, variable )
             .then(response => response)
             .catch(err => err)
     },
-    getAlldislikesinOneVideo: (variable) => {
-        return Axios.post(`${BACKEND_URL_DISLIKES}/dislikes`, variable )
+    getAllDislikesinOneVideo: (variable) => {
+        return Axios.post(`${BACKEND_URL_DISLIKES}/getDislikes`, variable )
             .then(response => response)
             .catch(err => err)
     },

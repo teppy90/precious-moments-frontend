@@ -161,16 +161,3 @@ export default LikeDislikes
 
 
 
-
-// LikeDislikesServices.getAllLikesinOneVideo: (variable) => {
-//     return Axios.post(`${BACKEND_URL_LIKES}/likes`, variable )
-//         .then(response => response)
-//         .catch(err => err)
-// },
-// LikeDislikesServices.getAlldislikesinOneVideo: (variable) => {
-//     return Axios.post(`${BACKEND_URL_DISLIKES}/dislikes`, variable )
-//         .then(response => response)
-//         .catch(err => err)
-// },
-// }
-
