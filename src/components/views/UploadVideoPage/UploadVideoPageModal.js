@@ -125,7 +125,7 @@ function UploadVideoPageModal(props) {
 
         <MDBContainer>
             <MDBModal isOpen={props.show} toggle={toggle}>
-                <MDBModalHeader>Upload Video</MDBModalHeader>
+                <MDBModalHeader style={{ backgroundColor:'#676CFB' }}><span style={{color:"white"}}>Upload Video</span></MDBModalHeader>
                 <MDBModalBody>
                     <Form onSubmit={createVideo}>
                         <div style={{ display: 'flex', justifyContent: 'center' }}>

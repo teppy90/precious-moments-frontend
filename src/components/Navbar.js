@@ -34,59 +34,89 @@ const Navigationbar = props => {
     //     }
     // }
 
-    const unauthenticatedNavBar = () => {
-        return (
-            <>
-                <Navbar className="navbar" bg="light" variant="light">
-                    <Navbar.Brand href="/">Precious Moments</Navbar.Brand>
+    // const unauthenticatedNavBar = () => {
+    //     return (
+    //         <>
+    //             <Navbar className="navbar" variant="light" style={{ backgroundColor: '#676CFB' }}>
+    //                 <Navbar.Brand href="/" style={{ color: "white", fontFamily: 'Brush Script MT', fontWeight: 'bold', fontSize: '30px' }}>Precious Moments</Navbar.Brand>
 
-                    <Form inline>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-primary">Search</Button>
-                    </Form>
+    //                 <Form inline>
+    //                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+    //                     <Button variant="outline-primary">Search</Button>
+    //                 </Form>
 
+    //                 <Nav className="ml-auto">
+    //                     <Nav.Link href="/signup">Sign Up</Nav.Link>
+    //                     <Nav.Link href="/login">Login</Nav.Link>
+    //                 </Nav>
+
+    //             </Navbar>
+    //         </>
+    //     )
+    // }
+
+    // const authenticatedNavBar = () => {
+    //     return (
+    //         <>
+
+    //             <Navbar className="navbar" variant="light" style={{ backgroundColor: '#676CFB' }}>
+    //                 <Navbar.Brand href="/">Precious Moments</Navbar.Brand>
+
+    //                 <Form inline>
+    //                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+    //                     <Button variant="outline-primary">Search</Button>
+
+    //                 </Form>
+
+    //                 <Nav className="ml-auto">
+    //                     <Nav.Link href={`/priProfile`}> {user ? <img src={user.image || "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png"} className="rounded-circle" style={{ width: '40px' }} /> : <AccountCircleIcon fontSize="large" />} </Nav.Link>
+
+    //                     <button type="button"
+    //                         className="btn btn-link nav-link" onClick={() => setShowUpload(true)}
+    //                     >Upload</button>
+
+    //                     <button type="button"
+    //                         className="btn btn-link nav-link"
+    //                         onClick={onClickLogoutHandler} ><Link to="/">Logout</Link></button>
+    //                 </Nav>
+
+    //             </Navbar>
+    //         </>
+    //     )
+    // }
+
+    return (
+        <>
+            <Navbar className="navbar" variant="light" style={{ backgroundColor: '#676CFB', textShadow: '2px 2px black' }}>
+                <Navbar.Brand href="/" style={{ color: "white", fontFamily: 'Brush Script MT', fontWeight: 'bold', fontSize: '30px' }}>Precious Moments</Navbar.Brand>
+
+                <Form inline>
+                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                    <Button variant="outline-light">Search</Button>
+                </Form>
+
+                {(isAuthenticated) ? (
                     <Nav className="ml-auto">
-                        <Nav.Link href="/signup">Sign Up</Nav.Link>
-                        <Nav.Link href="/login">Login</Nav.Link>
-                    </Nav>
-
-                </Navbar>
-            </>
-        )
-    }
-
-    const authenticatedNavBar = () => {
-        return (
-            <>
-
-                <Navbar className="navbar" bg="light" variant="light">
-                    <Navbar.Brand href="/">Precious Moments</Navbar.Brand>
-
-                    <Form inline>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-primary">Search</Button>
-
-                    </Form>
-
-                    <Nav className="ml-auto">
-                        <Nav.Link href={`/priProfile`}> {user ? <img src={user.image || "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png"} className="rounded-circle" style={{ width: '40px' }} /> : <AccountCircleIcon fontSize="large" />} </Nav.Link>
+                        <Nav.Link href={`/priProfile`}> {(user) ? <img src={user.image || "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png"} className="rounded-circle" style={{ width: '40px' }} /> : <AccountCircleIcon fontSize="large" />} </Nav.Link>
 
                         <button type="button"
                             className="btn btn-link nav-link" onClick={() => setShowUpload(true)}
-                        >Upload</button>
+                            style={{ color: 'white', textShadow: '2px 2px black' }} >Upload</button>
 
                         <button type="button"
                             className="btn btn-link nav-link"
-                            onClick={onClickLogoutHandler} ><Link to="/">Logout</Link></button>
+                            onClick={onClickLogoutHandler}><Link to="/" style={{ color: 'white', textShadow: '2px 2px black' }}>Logout</Link></button>
                     </Nav>
+                ) : (
+                        <Nav className="ml-auto">
+                            <Nav.Link href="/signup" style={{ color: 'white' }}>Sign Up</Nav.Link>
+                            <Nav.Link href="/login" style={{ color: 'white' }}>Login</Nav.Link>
+                        </Nav>
+                    )
+                }
 
-                </Navbar>
-            </>
-        )
-    }
-    return (
-        <>
-            {!isAuthenticated ? unauthenticatedNavBar() : authenticatedNavBar()}
+            </Navbar>
+            {/* {!isAuthenticated ? unauthenticatedNavBar() : authenticatedNavBar()} */}
             {(isShowUpload) ? <UploadVideoPageModal show={isShowUpload} setShow={setShowUpload} /> : ''}
         </>
     )
