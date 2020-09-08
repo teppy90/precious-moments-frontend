@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { List, Avatar } from 'antd';
 import Comments from "../PlayVideoPage/comment"
+import LikeDislikes from './LikeDislikes'
 import "../PlayVideoPage/PlayVideoPage.css"
 import moment from 'moment';
 import CommentServices from '../../../Services/CommentServices';
 import VideoServices from '../../../Services/VideoServices'
+import LikeDislikes from '../../../Services/LikeDislikeServices';
 
 function PlayVideoPage(props) {
 
@@ -52,6 +54,11 @@ function PlayVideoPage(props) {
            {console.log(Video)}
             <h2>{Video.title}</h2>
             <h5>{moment(Video.createdAt).format("LL")}</h5>
+
+            
+            <List.Item
+                            actions={[<LikeDislikes video videoId={videoId} userId={localStorage.getItem('userId')}  />, <Subscriber userTo={Video.writer._id} userFrom={localStorage.getItem('userId')} />]}
+                        >
             <List.Item
                 actions={[]}
             >
