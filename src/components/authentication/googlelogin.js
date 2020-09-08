@@ -1,5 +1,6 @@
 import React from 'react'
 import { makeStyles, createStyles } from '@material-ui/core/styles'
+import {GOOGLE_AUTH} from '../constant/constant'
 
 const useStyles = makeStyles(theme =>
   createStyles({
@@ -51,7 +52,7 @@ const GoogleLoginButton = () => {
   const classes = useStyles({})
 
   const togglegoogle = () => {
-    window.open("http://localhost:3002/users/google","_blank");
+    window.open(`${GOOGLE_AUTH}`,"_blank");
   }
   // "width=450,height=600"
 
