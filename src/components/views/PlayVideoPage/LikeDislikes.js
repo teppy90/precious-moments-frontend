@@ -48,42 +48,42 @@ function LikeDislikes(props) {
 }
 
 
-// Axios.post('/api/like/getLikes', variable)
-// .then(response => {
-//     console.log('getLikes',response.data)
+Axios.post('/api/like/getLikes', variable)
+.then(response => {
+    console.log('getLikes',response.data)
 
-//     if (response.data.success) {
-//         //How many likes does this video or comment have 
-//         setLikes(response.data.likes.length)
+    if (response.data.success) {
+        //How many likes does this video or comment have 
+        setLikes(response.data.likes.length)
 
-//         //if I already click this like button or not 
-//         response.data.likes.map(like => {
-//             if (like.userId === props.userId) {
-//                 setLikeAction('liked')
-//             }
-//         })
-//     } else {
-//         alert('Failed to get likes')
-//     }
-// })
+        //if I already click this like button or not 
+        response.data.likes.map(like => {
+            if (like.userId === props.userId) {
+                setLikeAction('liked')
+            }
+        })
+    } else {
+        alert('Failed to get likes')
+    }
+})
 
-// Axios.post('/api/like/getDislikes', variable)
-// .then(response => {
-//     console.log('getDislike',response.data)
-//     if (response.data.success) {
-//         //How many likes does this video or comment have 
-//         setDislikes(response.data.dislikes.length)
+Axios.post('/api/like/getDislikes', variable)
+.then(response => {
+    console.log('getDislike',response.data)
+    if (response.data.success) {
+        //How many likes does this video or comment have 
+        setDislikes(response.data.dislikes.length)
 
-//         //if I already click this like button or not 
-//         response.data.dislikes.map(dislike => {
-//             if (dislike.userId === props.userId) {
-//                 setDislikeAction('disliked')
-//             }
-//         })
-//     } else {
-//         alert('Failed to get dislikes')
-//     }
-// })
+        //if I already click this like button or not 
+        response.data.dislikes.map(dislike => {
+            if (dislike.userId === props.userId) {
+                setDislikeAction('disliked')
+            }
+        })
+    } else {
+        alert('Failed to get dislikes')
+    }
+})
 
 
 export default LikeDislikes
