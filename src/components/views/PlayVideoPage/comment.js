@@ -4,14 +4,24 @@ import { AuthContext } from "../../../AuthContext"
 import SingleComment from "../PlayVideoPage/SingleComment"
 import ReplyComment from "../PlayVideoPage/replycomment"
 import CommentServices from '../../../Services/CommentServices';
+import { useHistory } from 'react-router-dom';
 const { TextArea } = Input;
 
 function Comments(props) {
-    const { user } = useContext(AuthContext);
+
     const [Comment, setComment] = useState("");
+    const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
+    const history = useHistory()
+
 
     const handleChange = (e) => {
         setComment(e.currentTarget.value)
+    }
+
+    const onSubmitUnauthenticateed = (e) => {
+        console.log('not authenticated')
+        history.push('/login')
+
     }
 
     const onSubmit = (e) => {
@@ -33,6 +43,37 @@ function Comments(props) {
             })
     }
 
+    const unauthenticatedComments = () => {
+        return (
+            <form style={{ display: 'flex' }} onSubmit={onSubmitUnauthenticateed}>
+            <TextArea
+                Style={{ width: '100%', borderRadius: '5px' }}
+                onChange={handleChange}
+                value={Comment}
+                placeholder="write some comments"
+            />
+            <br />
+            <Button style={{ width: '20%', height: '52px' }} onClick={onSubmitUnauthenticateed}>Submit</Button>
+        </form>
+        )
+    }
+
+    const authenticatedComments = () => {
+        return (
+            <form style={{ display: 'flex' }} onSubmit={onSubmit}>
+            <TextArea
+                Style={{ width: '100%', borderRadius: '5px' }}
+                onChange={handleChange}
+                value={Comment}
+                placeholder="write some comments"
+            />
+            <br />
+            <Button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>Submit</Button>
+        </form>
+        )
+       
+    }
+
     return (
         <div>
             <br />
@@ -49,16 +90,7 @@ function Comments(props) {
                     </React.Fragment>
                 ))
             }
-            <form style={{ display: 'flex' }} onSubmit={onSubmit}>
-                <TextArea
-                    Style={{ width: '100%', borderRadius: '5px' }}
-                    onChange={handleChange}
-                    value={Comment}
-                    placeholder="write some comments"
-                />
-                <br />
-                <Button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>Submit</Button>
-            </form>
+            {!isAuthenticated ? unauthenticatedComments() : authenticatedComments()}
         </div>
     )
 }

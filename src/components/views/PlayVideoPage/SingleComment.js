@@ -3,12 +3,17 @@ import { AuthContext } from "../../../AuthContext"
 import { Comment, Avatar, Button, Input } from 'antd'
 import 'antd/dist/antd.css'
 import CommentServices from '../../../Services/CommentServices';
+import {useHistory} from 'react-router-dom';
+
 const { TextArea } = Input;
 
+
 function SingleComment(props) {
-    const { user } = useContext(AuthContext);
     const [CommentValue, setCommentValue] = useState("");
     const [OpenReply, setOpenReply] = useState(false);
+    const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext);
+    const history = useHistory()
+
 
     const handleChange = (e) => {
         setCommentValue(e.currentTarget.value)
@@ -18,24 +23,62 @@ function SingleComment(props) {
         setOpenReply(!OpenReply)
     }
 
+    
+    const onSubmitUnauthenticateed = (e) => {
+        console.log('not authenticated')
+        history.push('/login')
+
+    }
+
     const onSubmit = (e) => {
         e.preventDefault();
-        const variable = {
-            writer: user._id,
-            postId: props.postId,
-            responseTo: props.comment._id,
-            content: CommentValue
-        }
-        CommentServices.saveComments(variable)
-            .then(response => {
-                if (response.data.success) {
-                    setCommentValue("")
-                    setOpenReply(!OpenReply)
-                    props.refreshFunction(response.data.result)
-                } else {
-                    alert('Failed to save comment')
-                }
-            })
+            const variable = {
+                writer: user._id,
+                postId: props.postId,
+                responseTo: props.comment._id,
+                content: CommentValue
+            }
+            CommentServices.saveComments(variable)
+                .then(response => {
+                    if (response.data.success) {
+                        setCommentValue("")
+                        setOpenReply(!OpenReply)
+                        props.refreshFunction(response.data.result)
+                    } else {
+                        alert('Failed to save comment')
+                    }
+                })
+    }
+
+    const unauthenticatedComments = () => {
+        return (
+            <form style={{ display: 'flex' }} onSubmit={onSubmitUnauthenticateed}>
+            <TextArea
+                        style={{ width: '100%', borderRadius: '5px' }}
+                        onChange={handleChange}
+                        value={CommentValue}
+                        placeholder="write some comments"
+                    />
+                    <br />
+                    <Button style={{ width: '20%', height: '52px' }} onClick={onSubmitUnauthenticateed}>Submit</Button>
+        </form>
+        )
+    }
+
+    const authenticatedComments = () => {
+        return (
+            <form style={{ display: 'flex' }} onSubmit={onSubmit}>
+            <TextArea
+                        style={{ width: '100%', borderRadius: '5px' }}
+                        onChange={handleChange}
+                        value={CommentValue}
+                        placeholder="write some comments"
+                    />
+                    <br />
+                    <Button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>Submit</Button>
+        </form>
+        )
+       
     }
 
     const actions = [
@@ -43,6 +86,7 @@ function SingleComment(props) {
     ]
     return (
         <div>
+            {console.log(isAuthenticated)}
             <Comment
                 actions={actions}
                 author={props.comment.writer.firstName + " " + props.comment.writer.lastName}
@@ -58,16 +102,11 @@ function SingleComment(props) {
                     </p>
                 }></Comment>
             {OpenReply &&
-                <form style={{ display: 'flex' }} onSubmit={onSubmit}>
-                    <TextArea
-                        style={{ width: '100%', borderRadius: '5px' }}
-                        onChange={handleChange}
-                        value={CommentValue}
-                        placeholder="write some comments"
-                    />
-                    <br />
-                    <Button style={{ width: '20%', height: '52px' }} onClick={onSubmit}>Submit</Button>
-                </form>
+                    <>
+                                {!isAuthenticated ? unauthenticatedComments() : authenticatedComments()}
+
+                    </>
+                
             }
         </div>
     )
