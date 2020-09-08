@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Tooltip, Icon } from 'antd';
-import { AuthContext } from "../../../AuthContext"
+import { Tooltip } from 'antd';
+import Icon from '@ant-design/icons';
 import Axios from 'axios';
-import LikeDislikes from '../../../Services/LikeDislikeServices'
+import LikeDislikesServices from '../../../Services/LikeDislikeServices'
 
 function LikeDislikes(props) {
-
-    const { user } = useContext(AuthContext);
-
-
     const [Likes, setLikes] = useState(0)
     const [Dislikes, setDislikes] = useState(0)
     const [LikeAction, setLikeAction] = useState(null)
@@ -21,7 +17,121 @@ function LikeDislikes(props) {
         variable = { commentId: props.commentId, userId: props.userId }
     }
 
+    useEffect(() => {
 
+        Axios.post('/api/like/getLikes', variable)
+        .then(response => {
+            console.log('getLikes',response.data)
+
+            if (response.data.success) {
+                //How many likes does this video or comment have 
+                setLikes(response.data.likes.length)
+
+                //if I already click this like button or not 
+                response.data.likes.map(like => {
+                    if (like.userId === props.userId) {
+                        setLikeAction('liked')
+                    }
+                })
+            } else {
+                alert('Failed to get likes')
+            }
+        })
+
+    Axios.post('/api/like/getDislikes', variable)
+        .then(response => {
+            console.log('getDislike',response.data)
+            if (response.data.success) {
+                //How many likes does this video or comment have 
+                setDislikes(response.data.dislikes.length)
+
+                //if I already click this like button or not 
+                response.data.dislikes.map(dislike => {
+                    if (dislike.userId === props.userId) {
+                        setDislikeAction('disliked')
+                    }
+                })
+            } else {
+                alert('Failed to get dislikes')
+            }
+        })
+
+}, [])
+
+
+const onLike = () => {
+
+    if (LikeAction === null) {
+
+        Axios.post('/api/like/upLike', variable)
+            .then(response => {
+                if (response.data.success) {
+
+                    setLikes(Likes + 1)
+                    setLikeAction('liked')
+
+                    //If dislike button is already clicked
+
+                    if (DislikeAction !== null) {
+                        setDislikeAction(null)
+                        setDislikes(Dislikes - 1)
+                    }
+                } else {
+                    alert('Failed to increase the like')
+                }
+            })
+    } else {
+
+        Axios.post('/api/like/unLike', variable)
+            .then(response => {
+                if (response.data.success) {
+
+                    setLikes(Likes - 1)
+                    setLikeAction(null)
+
+                } else {
+                    alert('Failed to decrease the like')
+                }
+            })
+    }
+}
+
+const onDisLike = () => {
+
+    if (DislikeAction !== null) {
+
+        Axios.post('/api/like/unDisLike', variable)
+            .then(response => {
+                if (response.data.success) {
+
+                    setDislikes(Dislikes - 1)
+                    setDislikeAction(null)
+
+                } else {
+                    alert('Failed to decrease dislike')
+                }
+            })
+    } else {
+
+        Axios.post('/api/like/upDisLike', variable)
+            .then(response => {
+                if (response.data.success) {
+
+                    setDislikes(Dislikes + 1)
+                    setDislikeAction('disliked')
+
+                    //If dislike button is already clicked
+                    if(LikeAction !== null ) {
+                        setLikeAction(null)
+                        setLikes(Likes - 1)
+                    }
+
+                } else {
+                    alert('Failed to increase dislike')
+                }
+            })
+    }
+}
 
     return (
         <React.Fragment>
@@ -47,43 +157,20 @@ function LikeDislikes(props) {
     )
 }
 
-
-Axios.post('/api/like/getLikes', variable)
-.then(response => {
-    console.log('getLikes',response.data)
-
-    if (response.data.success) {
-        //How many likes does this video or comment have 
-        setLikes(response.data.likes.length)
-
-        //if I already click this like button or not 
-        response.data.likes.map(like => {
-            if (like.userId === props.userId) {
-                setLikeAction('liked')
-            }
-        })
-    } else {
-        alert('Failed to get likes')
-    }
-})
-
-Axios.post('/api/like/getDislikes', variable)
-.then(response => {
-    console.log('getDislike',response.data)
-    if (response.data.success) {
-        //How many likes does this video or comment have 
-        setDislikes(response.data.dislikes.length)
-
-        //if I already click this like button or not 
-        response.data.dislikes.map(dislike => {
-            if (dislike.userId === props.userId) {
-                setDislikeAction('disliked')
-            }
-        })
-    } else {
-        alert('Failed to get dislikes')
-    }
-})
-
-
 export default LikeDislikes
+
+
+
+
+// LikeDislikesServices.getAllLikesinOneVideo: (variable) => {
+//     return Axios.post(`${BACKEND_URL_LIKES}/likes`, variable )
+//         .then(response => response)
+//         .catch(err => err)
+// },
+// LikeDislikesServices.getAlldislikesinOneVideo: (variable) => {
+//     return Axios.post(`${BACKEND_URL_DISLIKES}/dislikes`, variable )
+//         .then(response => response)
+//         .catch(err => err)
+// },
+// }
+

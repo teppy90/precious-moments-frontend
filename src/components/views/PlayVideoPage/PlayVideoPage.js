@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { List, Avatar } from 'antd';
 import Comments from "../PlayVideoPage/comment"
-import LikeDislikes from './LikeDislikes'
-import "../PlayVideoPage/PlayVideoPage.css"
+import LikeDislikes from './LikeDislikes';
+import "../PlayVideoPage/PlayVideoPage.css";
 import moment from 'moment';
 import CommentServices from '../../../Services/CommentServices';
-import VideoServices from '../../../Services/VideoServices'
-import LikeDislikes from '../../../Services/LikeDislikeServices';
+import VideoServices from '../../../Services/VideoServices';
 
 function PlayVideoPage(props) {
 
@@ -57,11 +56,8 @@ function PlayVideoPage(props) {
 
             
             <List.Item
-                            actions={[<LikeDislikes video videoId={videoId} userId={localStorage.getItem('userId')}  />, <Subscriber userTo={Video.writer._id} userFrom={localStorage.getItem('userId')} />]}
+                            actions={[<LikeDislikes video videoId={videoId} userId={localStorage.getItem('userId')}  />]}
                         >
-            <List.Item
-                actions={[]}
-            >
                 <List.Item.Meta
                     avatar={<Avatar src={(Video.writer && Video.writer.image)|| "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png" }   />}
                     title={<a href={`/${Video.writer._id}/pubProf`}> {Video.writer.firstName + " " + Video.writer.lastName}</a>}
