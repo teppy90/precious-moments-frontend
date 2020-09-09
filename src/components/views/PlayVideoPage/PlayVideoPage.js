@@ -43,7 +43,7 @@ function PlayVideoPage(props) {
         setCommentLists(CommentLists.concat(newComment))
     }
     
-
+    
     return (
         (isLoaded) &&
         <div className="postPage" style={{ width: '100%', padding: '3rem 4em' }}>

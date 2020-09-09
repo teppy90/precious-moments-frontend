@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Tooltip } from 'antd';
-import Icon from '@ant-design/icons';
+import { LikeTwoTone, DislikeTwoTone } from '@ant-design/icons'
 import Axios from 'axios';
+import { BACKEND_URL_LIKES, BACKEND_URL_DISLIKES, CLOUDINARY_UPLOAD_PRESET, CLOUDINARY_API } from '../../constant/constant'
 // import LikeDislikesServices from '../../../Services/LikeDislikeServices'
 
 function LikeDislikes(props) {
@@ -18,8 +19,7 @@ function LikeDislikes(props) {
     }
 
     useEffect(() => {
-
-        Axios.post('/api/like/getLikes', variable)
+        Axios.post(`${BACKEND_URL_LIKES}/getLikes`, variable)
         .then(response => {
             console.log('getLikes',response.data)
 
@@ -38,14 +38,14 @@ function LikeDislikes(props) {
             }
         })
 
-    Axios.post('/api/like/getDislikes', variable)
+    Axios.post(`${BACKEND_URL_LIKES}/getDislikes`, variable)
         .then(response => {
-            console.log('getDislike',response.data)
+            console.log('getDislikes',response.data)
             if (response.data.success) {
-                //How many likes does this video or comment have 
+                // How many likes does this video or comment have 
                 setDislikes(response.data.dislikes.length)
 
-                //if I already click this like button or not 
+                // if I already click this like button or not 
                 response.data.dislikes.map(dislike => {
                     if (dislike.userId === props.userId) {
                         setDislikeAction('disliked')
@@ -63,7 +63,7 @@ const onLike = () => {
 
     if (LikeAction === null) {
 
-        Axios.post('/api/like/upLike', variable)
+        Axios.post(`${BACKEND_URL_LIKES}/getLikes`, variable)
             .then(response => {
                 if (response.data.success) {
 
@@ -82,7 +82,7 @@ const onLike = () => {
             })
     } else {
 
-        Axios.post('/api/like/unLike', variable)
+        Axios.post(`${BACKEND_URL_LIKES}/getLikes`, variable)
             .then(response => {
                 if (response.data.success) {
 
@@ -100,7 +100,7 @@ const onDisLike = () => {
 
     if (DislikeAction !== null) {
 
-        Axios.post('/api/like/unDisLike', variable)
+        Axios.post(`${BACKEND_URL_LIKES}/getLikes`, variable)
             .then(response => {
                 if (response.data.success) {
 
@@ -113,7 +113,7 @@ const onDisLike = () => {
             })
     } else {
 
-        Axios.post('/api/like/upDisLike', variable)
+        Axios.post(`${BACKEND_URL_LIKES}/getLikes`, variable)
             .then(response => {
                 if (response.data.success) {
 
@@ -137,7 +137,7 @@ const onDisLike = () => {
         <React.Fragment>
             <span key="comment-basic-like">
                 <Tooltip title="Like">
-                    <Icon type="like"
+                    <LikeTwoTone type="like"
                         theme={LikeAction === 'liked' ? 'filled' : 'outlined'}
                         onClick={onLike} />
                 </Tooltip>
@@ -145,7 +145,7 @@ const onDisLike = () => {
             </span>&nbsp;&nbsp;
             <span key="comment-basic-dislike">
                 <Tooltip title="Dislike">
-                    <Icon
+                    <DislikeTwoTone
                         type="dislike"
                         theme={DislikeAction === 'disliked' ? 'filled' : 'outlined'}
                         onClick={onDisLike}
