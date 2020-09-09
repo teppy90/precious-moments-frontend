@@ -63,7 +63,7 @@ const onLike = () => {
 
     if (LikeAction === null) {
 
-        Axios.post(`${BACKEND_URL_LIKES}/getLikes`, variable)
+        Axios.post(`${BACKEND_URL_LIKES}/upLike`, variable)
             .then(response => {
                 if (response.data.success) {
 
@@ -82,7 +82,7 @@ const onLike = () => {
             })
     } else {
 
-        Axios.post(`${BACKEND_URL_LIKES}/getLikes`, variable)
+        Axios.post(`${BACKEND_URL_LIKES}/unLike`, variable)
             .then(response => {
                 if (response.data.success) {
 
@@ -100,7 +100,7 @@ const onDisLike = () => {
 
     if (DislikeAction !== null) {
 
-        Axios.post(`${BACKEND_URL_LIKES}/getLikes`, variable)
+        Axios.post(`${BACKEND_URL_LIKES}/unDisLike`, variable)
             .then(response => {
                 if (response.data.success) {
 
@@ -113,7 +113,7 @@ const onDisLike = () => {
             })
     } else {
 
-        Axios.post(`${BACKEND_URL_LIKES}/getLikes`, variable)
+        Axios.post(`${BACKEND_URL_LIKES}/upDisLike`, variable)
             .then(response => {
                 if (response.data.success) {
 
