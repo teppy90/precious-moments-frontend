@@ -10,7 +10,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { GoogleLoginButton } from '../../components/authentication/googlelogin'
+import GoogleLoginButton from '../../components/authentication/googlelogin'
 import AuthService from "../../Services/AuthServices";
 import { AuthContext } from "../../AuthContext";
 
