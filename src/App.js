@@ -9,8 +9,8 @@ import LandingPage from './components/LandingPage'
 import UploadVideoPage from './components/views/UploadVideoPage/UploadVideoPage';
 import UserProfilePri from './components/views/UserProfilePage/UserProfilePri';
 import UserProfilePub from './components/views/UserProfilePage/UserProfilePub';
-import PlayVideoPage from './components/views/PlayVideoPage/PlayVideoPage'
-import PrivateRoute from './hocs/PrivateRoute'
+import PlayVideoPage from './components/views/PlayVideoPage/PlayVideoPage';
+import PrivateRoute from './hocs/PrivateRoute';
 
 function App() {
   return (
@@ -23,6 +23,7 @@ function App() {
       <Route path="/login"component= {Login}/>
       <Route path="/signup" component={Signup} />
       <Route path ="/video/:videoId" component={PlayVideoPage} />
+
     </Switch>
   </React.Fragment>
   );
