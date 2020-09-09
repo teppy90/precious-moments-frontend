@@ -56,7 +56,7 @@ function LandingPage(props) {
     const renderCards = (data) => {
         return data.map((video, index) => {
             return (
-                <div className='item'>
+                <div className='item' style={{ maxHeight: '170px' }}>
                     <a href={`/video/${video._id}`} >
                         <video width="100%" src={video.video_url} />
                     </a>

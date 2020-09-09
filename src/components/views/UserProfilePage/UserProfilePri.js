@@ -77,7 +77,7 @@ function UserProfilePri() {
             >
                 <div style={{ margin: '10px' }}>
                     <div>
-                        <video style={{ width: '80%' }}>
+                        <video style={{ width: '80%', maxHeight: '120px' }}>
                             <source src={video.video_url} />
                         </video>
                     </div>

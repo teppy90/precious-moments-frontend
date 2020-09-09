@@ -34,20 +34,20 @@ function UserProfilePub(props) {
                     textAlign: 'center',
                     margin: '5px'
                 }}
-                onClick={()=>window.location.href=`/video/${video._id}`}
+                onClick={() => window.location.href = `/video/${video._id}`}
             >
-                    <div style={{ margin: '10px' }}>
-                        <div>
-                            <video style={{ width: '80%' }}>
-                                <source src={video.video_url} />
-                            </video>
-                        </div>
-                        <div style={{ textAlign: 'left', width: '80%' }}>
-                            <div>Title: {video.title}</div>
-                            <div>Total likes: {video.likes}</div>
-                            <div>Date uploaded: {moment(video.createdAt).format("DD-MMM-YYYY")} </div>
-                        </div>
+                <div style={{ margin: '10px' }}>
+                    <div>
+                        <video style={{ width: '80%', maxHeight: '140px' }}>
+                            <source src={video.video_url} />
+                        </video>
                     </div>
+                    <div style={{ textAlign: 'left', width: '80%' }}>
+                        <div>Title: {video.title}</div>
+                        <div>Total likes: {video.likes}</div>
+                        <div>Date uploaded: {moment(video.createdAt).format("DD-MMM-YYYY")} </div>
+                    </div>
+                </div>
             </div>
         )
     })

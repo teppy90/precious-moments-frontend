@@ -15,26 +15,26 @@ function PlayVideoPage(props) {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        VideoServices.getVideo({videoId: videoId})
-        .then(response => {
-            if(response.data.success) {
-                console.log(response.data.video)
-                setVideo(response.data.video)
-                setIsLoaded(true);
-            } else {
-                alert('Failed to get video Info')
-            }
-        })
+        VideoServices.getVideo({ videoId: videoId })
+            .then(response => {
+                if (response.data.success) {
+                    console.log(response.data.video)
+                    setVideo(response.data.video)
+                    setIsLoaded(true);
+                } else {
+                    alert('Failed to get video Info')
+                }
+            })
 
-        CommentServices.getAllCommentsinOneVideo({postId: videoId})
-        .then(response => {
-            if (response.data.success) {
-                console.log('response.data.comments', response.data.result)
-                setCommentLists(response.data.result)
-            } else {
-                alert('Failed to get comments')
-            }
-        })
+        CommentServices.getAllCommentsinOneVideo({ postId: videoId })
+            .then(response => {
+                if (response.data.success) {
+                    console.log('response.data.comments', response.data.result)
+                    setCommentLists(response.data.result)
+                } else {
+                    alert('Failed to get comments')
+                }
+            })
 
     }, [])
 
@@ -42,29 +42,28 @@ function PlayVideoPage(props) {
         console.log(newComment)
         setCommentLists(CommentLists.concat(newComment))
     }
-    
-    
+
     return (
         (isLoaded) &&
         <div className="postPage" style={{ width: '100%', padding: '3rem 4em' }}>
-            
-            <video style={{ width: '50%', height: '50%' }} src={Video.video_url} controls></video> 
 
-           {console.log(Video)}
+            <video style={{ width: '50%', height: '50%', maxHeight: '500px' }} src={Video.video_url} controls></video>
+
+            {console.log(Video)}
             <h2>{Video.title}</h2>
             <h5>{moment(Video.createdAt).format("LL")}</h5>
             <List.Item
-                            actions={[<LikeDislikes video videoId={videoId} userId={localStorage.getItem('userId')}  />]}
-                        >
+                actions={[<LikeDislikes video videoId={videoId} userId={localStorage.getItem('userId')} />]}
+            >
                 <List.Item.Meta
-                    avatar={<Avatar src={(Video.writer && Video.writer.image)|| "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png" }   />}
+                    avatar={<Avatar src={(Video.writer && Video.writer.image) || "https://i.ibb.co/djkcPvD/blank-profile-picture-973460-640.png"} />}
                     title={<a href={`/${Video.writer._id}/pubProf`}> {Video.writer.firstName + " " + Video.writer.lastName}</a>}
                     description={Video.description}
                 />
                 <div></div>
             </List.Item>
 
-            <Comments CommentLists={CommentLists}  postId={videoId}  refreshFunction={updateComment}/>      
+            <Comments CommentLists={CommentLists} postId={videoId} refreshFunction={updateComment} />
 
         </div>
     )
