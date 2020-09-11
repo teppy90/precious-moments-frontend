@@ -10,7 +10,7 @@
 * Improvements
 
 ## Project Title : Precious Moments- a video uploading site
-developed by Helen, Shi Jie & Danny
+developed by Danny, Jared and Shi Jie
 
 
 ## Project Demo
