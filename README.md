@@ -44,8 +44,8 @@ Precious Moments is a video uploading website that allows users to share upload 
    - JsonWebToken
    - React-Google-Login
 * Video Uploading
-  -Multer 
-  -Cloudinary
+  - Multer 
+  - Cloudinary
 * MongoDB
 * Mongoose
 * Bootstrap
