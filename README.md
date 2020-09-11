@@ -54,7 +54,9 @@ Precious Moments is a video uploading website that allows users to share upload 
 
 ## Wireframes
 
-
+![](src/wireframe/frontpage.png)
+![](src/wireframe/profile.png)
+![](src/wireframe/upload.png)
 
 ## Project implementation :
 
@@ -81,9 +83,9 @@ Project structure
 
 ```
 project
- └── upsell-backend (server)
+ └── preciousmoment-backend (server)
    └── controller   — Storing APIs (GET, POST, PUT, DELETE)
-      |__ listings.js/orders.js/user.js
+      |__ videos.js/users.js/comments.js/likedislike.js
    |__ db
     ├── index.js
 
@@ -93,7 +95,7 @@ project
    ├── routes
    └── Server.js    — Everything a server needs to start
 
-  └── upsell-frontend (client)
+  └── preciousmoment-frontend (client)
      └── Public  
         |__ index.html
      ├── components - store all the react components
@@ -103,7 +105,6 @@ project
      ├── App.js
      └── App.css
      |__ AuthContext.js - centralized users' information
-     |__ context.js - centralized listings' information
      |__ index.js
 ```
 
