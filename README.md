@@ -1,68 +1,121 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Table of contents
+* Project Title
+* Project Demo
+* Project Motivation
+* Technologies
+* Wireframes
+* Project scope and implementation
+* Challenges
+* Improvements
 
-In the project directory, you can run:
+## Project Title : Precious Moments- a video uploading site
+developed by Helen, Shi Jie & Danny
 
-### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Project Demo
+* https://preciousmoment.herokuapp.com/
+* https://github.com/teppy90/precious-moments-frontend
+* https://github.com/teoshijie/preciousmoments-backend
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `npm test`
+## Project motivation
+Precious Moments is a video uploading website that allows users to share upload videos and share with their friends and families. 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Project Scope 
+* MVP 
+* Login page - with google authentication
+* Able to upload and delete videos and description- using multer,  cloudinary and react drag and drog download
+* Able to add comments 
 
-### `npm run build`
+* Stretch goals
+* Create a live video streaming function
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Technologies
+* Node.js,
+* Express
+* Axios
+* React.js
+  - React Router Dom
+  - React Context API
+* User authentication
+   - passport.js
+   - JsonWebToken
+   - React-Google-Login
+* Video Uploading
+  -Multer 
+  -Cloudinary
+* MongoDB
+* Mongoose
+* Bootstrap
+* Ant Design
+* CSS
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Wireframes
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Project implementation :
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The architecture of our application is based on MVC and Microservices model. They are:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* Client Tier (Front-end/View)
+It was written in Javascript, HTML and CSS using ReactJS as the framework. User will interact with the server by accessing the features of our application.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* The Business Logic Tier (Back-end/Controller)
+It was written using NodeJS and ExpressJS, and this tier represents the Application Server that will act as a bridge of communication for the Client Tier and Database Tier. This tier will accept API HTTP requests from the user and follow with the appropriate response.
 
-## Learn More
+* Database Tier (Model)
+MongoDB is used to store all crucial data our application needs to function.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project contains 3 parts:
 
-### Code Splitting
+1) Build a good structured SERVER App with NodeJS/ExpressJS/MongoDB and
+   to implement user authentication with PassportJS and JSONWebToken (JWT).
+2) Build a ReactJS app and integrate it with the SERVER.
+3) Heroku Deployment
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Project structure
 
-### Analyzing the Bundle Size
+```
+project
+ └── upsell-backend (server)
+   └── controller   — Storing APIs (GET, POST, PUT, DELETE)
+      |__ listings.js/orders.js/user.js
+   |__ db
+    ├── index.js
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+   └── database
+    ├── model       — store all the models of the project
+    └── schema      — create attribute for each model
+   ├── routes
+   └── Server.js    — Everything a server needs to start
 
-### Making a Progressive Web App
+  └── upsell-frontend (client)
+     └── Public  
+        |__ index.html
+     ├── components - store all the react components
+     └── hocs
+          |__ PrivateRoute.js
+     └── services  - store all the API calls  
+     ├── App.js
+     └── App.css
+     |__ AuthContext.js - centralized users' information
+     |__ context.js - centralized listings' information
+     |__ index.js
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-### Advanced Configuration
+## Challenges
+* Herokuapp.com that does not allow cookies- This creates problems when Google Authentication is carried out in the backend as the user data cannot be passed to the front end. As a result React-Google-Login is used instead to carry out Google Authentication at the front end.
+* We didn't implement the video chat functionality because we ran out of time to fully understand Socket.IO and WebRTC. 
+* User profile image does not load initially when user is redirected to the home page. 
+* Integration of 3 parties codes 
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Improvements
+* To implement forget password feature and email verification for user authentication 
+* To video streaming function through socket.io and WebRTC 
+* To allow users to delete and edit their comments 
+* To create a search bar 
+* A share button to allow users to easily share videos to others 
