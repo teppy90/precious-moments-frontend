@@ -3,6 +3,7 @@
 * Project Title
 * Project Demo
 * Project Motivation
+* Project Scope
 * Technologies
 * Wireframes
 * Project scope and implementation
@@ -19,7 +20,7 @@ developed by Danny, Jared and Shi Jie
 * https://github.com/teoshijie/preciousmoments-backend
 
 
-## Project motivation
+## Project Motivation
 Precious Moments is a video uploading website that allows users to share upload videos and share with their friends and families. 
 
 ## Project Scope 
